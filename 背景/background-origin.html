@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>background-origin</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div {
+			width: 100px;
+			height: 80px;
+			background: lime url(http://i.gtimg.cn/music/photo/mid_album_90/0/7/004Z88hS1FiU07.jpg) no-repeat;
+			padding: 20px;
+			margin-top: 10px;
+			border: 50px dotted rgba(0,0,0,.5);
+		}
+		.box1 {
+			-webkit-background-origin: border-box;
+			background-origin: border-box;
+		}
+		.box2 {
+			-webkit-background-origin: padding-box;
+			background-origin: padding-box;
+		}
+		.box3 {
+			-webkit-background-origin: content-box;
+			background-origin: content-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">border-box</div>
+	<div class="box2">padding-box</div>
+	<div class="box3">content-box</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>background-size</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div {
+			width: 100px;
+			height: 80px;
+			background: lime url(http://i.gtimg.cn/music/photo/mid_album_90/0/7/004Z88hS1FiU07.jpg) no-repeat;
+			padding: 20px;
+			margin-top: 10px;
+			border: 50px solid rgba(0,0,0,.5);
+			color: red;
+		}
+		.box1 {
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+		.box2 {
+			-webkit-background-size: contain;
+			background-size: contain;
+		}
+		.box3 {
+			-webkit-background-size: 10px 10px;
+			background-size: 10px 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">cover</div>
+	<div class="box2">contain</div>
+	<div class="box3">10px 10px</div>
+</body>
+</html>

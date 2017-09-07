@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>background-clip</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div {
+			width: 100px;
+			height: 80px;
+			background: url(http://i.gtimg.cn/music/photo/mid_album_90/0/7/004Z88hS1FiU07.jpg);
+			padding: 20px;
+			margin-top: 10px;
+			border: 10px double rgba(0,0,0,.5);
+		}
+		.box1 {
+			-webkit-background-clip: border-box;
+			-moz-background-clip: border-box;
+			background-clip: border-box;
+		}
+		.box2 {
+			-webkit-background-clip: padding-box;
+			-moz-background-clip: padding-box;
+			background-clip: padding-box;
+		}
+		.box3 {
+			-webkit-background-clip: content-box;
+			-moz-background-clip: content-box;
+			background-clip: content-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">border-box</div>
+	<div class="box2">padding-box</div>
+	<div class="box3">content-box</div>
+</body>
+</html>
