@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTML5选择器</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;padding: 0;
+		}
+		ul {
+			float: left;
+			margin-right: 10px;
+			list-style: none;
+			text-align: center;
+		}
+		li {
+			margin-bottom: 5px;
+			line-height: 2.4;
+			border: 1px solid red;
+		}
+		li:first-child {
+			background: red;
+		}
+		li[class~='list1'] {
+			font-weight: 900;
+		}
+
+		/* 不能使用  list-  获取*/
+		li[class^='list1'] {
+			color: blue;
+		}
+
+		/* 可以使用 list- 获取 */
+		li[class*='list-2'] {
+			color: red;
+		}
+		
+		/* 只能有一个属性值 */
+		li[id|='list3'] {
+			font-weight: 900;
+			color: red;
+		}
+		
+		/* 所有标签的第五个 */
+		:nth-child(5) {
+			color: yellow;
+		}
+		/* li下面的第六个 */
+		li:nth-child(6) {
+			color: deeppink;
+		}
+		li:nth-last-child(2) {
+			color: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<ul id="box1" class="box">
+		<li>盒子1</li>
+		<li id="list1" class="list1 list-1">列表 1</li>
+		<li id="list2" class="list2 list-2">列表 2</li>
+		<li id="list3-list" class="list3 list-3">列表 3</li>
+		<li id="list4" class="list4 list-4">列表 4</li>
+		<li id="list5" class="list5 list-5">列表 5</li>
+		<li id="list6" class="list6 list-6">列表 6</li>
+		<li id="list7" class="list7 list-7">列表 7</li>
+		<li id="list8" class="list8 list-8">列表 8</li>
+		<li id="list9" class="list9 list-9">列表 9</li>
+		<li id="list10" class="list10 list-10">列表 10</li>
+	</ul>
+	<ul id="box2" class="box">
+		<li>盒子2</li>
+		<li id="list1" class="list1 list-1">列表 1</li>
+		<li id="list2" class="list2 list-2">列表 2</li>
+		<li id="list3-list" class="list3 list-3">列表 3</li>
+		<li id="list4" class="list4 list-4">列表 4</li>
+		<li id="list5" class="list5 list-5">列表 5</li>
+		<li id="list6" class="list6 list-6">列表 6</li>
+		<li id="list7" class="list7 list-7">列表 7</li>
+		<li id="list8" class="list8 list-8">列表 8</li>
+		<li id="list9" class="list9 list-9">列表 9</li>
+		<li id="list10" class="list10 list-10">列表 10</li>
+	</ul>
+	<ul id="box3" class="box">
+		<li>盒子3</li>
+		<li id="list1" class="list1 list-1">列表 1</li>
+		<li id="list2" class="list2 list-2">列表 2</li>
+		<li id="list3-list" class="list3 list-3">列表 3</li>
+		<li id="list4" class="list4 list-4">列表 4</li>
+		<li id="list5" class="list5 list-5">列表 5</li>
+		<li id="list6" class="list6 list-6">列表 6</li>
+		<li id="list7" class="list7 list-7">列表 7</li>
+		<li id="list8" class="list8 list-8">列表 8</li>
+		<li id="list9" class="list9 list-9">列表 9</li>
+		<li id="list10" class="list10 list-10">列表 10</li>
+	</ul>
+	<ul id="box4" class="box">
+		<li>盒子4</li>
+		<li id="list1" class="list1 list-1">列表 1</li>
+		<li id="list2" class="list2 list-2">列表 2</li>
+		<li id="list3" class="list3 list-3">列表 3</li>
+		<li id="list4" class="list4 list-4">列表 4</li>
+		<li id="list5" class="list5 list-5">列表 5</li>
+		<li id="list6" class="list6 list-6">列表 6</li>
+		<li id="list7" class="list7 list-7">列表 7</li>
+		<li id="list8" class="list8 list-8">列表 8</li>
+		<li id="list9" class="list9 list-9">列表 9</li>
+		<li id="list10" class="list10 list-10">列表 10</li>
+	</ul>
+	<ul id="box5" class="box">
+		<li>盒子5</li>
+		<li id="list1" class="list1 list-1">列表 1</li>
+		<li id="list2" class="list2 list-2">列表 2</li>
+		<li id="list3" class="list3 list-3">列表 3</li>
+		<li id="list4" class="list4 list-4">列表 4</li>
+		<li id="list5" class="list5 list-5">列表 5</li>
+		<li id="list6" class="list6 list-6">列表 6</li>
+		<li id="list7" class="list7 list-7">列表 7</li>
+		<li id="list8" class="list8 list-8">列表 8</li>
+		<li id="list9" class="list9 list-9">列表 9</li>
+		<li id="list10" class="list10 list-10">列表 10</li>
+	</ul>
+</body>
+</html>
