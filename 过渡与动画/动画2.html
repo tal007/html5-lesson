@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>动画2</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div.box {
+			position: absolute;
+			top: 0;
+			left: 100px;
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background: red;
+			animation: ball 5s linear infinite;
+		}
+		div.shadow {
+			position: absolute;
+			top: 300px;
+			left: 100px;
+			width: 100px;
+			height: 10px;
+			border-radius: 50%;
+			transform: scale(1.5);
+			background: rgba(0,0,0,.1);
+			animation: shadow 5s linear infinite;
+		}
+		@keyframes ball{
+			20%,60%,to {
+				background: yellow;
+				top: 200px;
+			}
+			45% {
+				background: blue;
+				top: 100px;
+			}
+			100% {
+				background: #000;
+				top: 0px;
+			}
+		}
+		@keyframes shadow{
+			20%,60%,to {
+				transform: scale(0);
+			}
+			45% {
+				transform: scale(1);
+			}
+			100% {
+				transform: scale(1.5);
+			}
+		}
+	</style> 
+</head>
+<body>
+	<div class="box"></div>
+	<div class="shadow"></div>
+</body>
+</html>

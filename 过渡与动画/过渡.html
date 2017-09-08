@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>过渡</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		.box {
+			width: 200px;
+			height: 200px;
+			background: red;
+			transition: all 1s 1s ease-in;
+		}
+		.box:hover {
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="box" class="box"></div>
+
+	<script type="text/javascript">
+		
+		// js的监听事件
+		box.addEventListener('webkitTransitionEnd',function(){
+			this.style.width = '400px';
+		});
+		box.addEventListener('transitionend',function(){
+			this.style.width = '400px';
+		});
+	</script>
+</body>
+</html>
