@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>text-shadow</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		body {
+			background: #898383;
+		}
+		p {
+			font-size: 50px;
+		}
+		.p1 {
+			color:#fff;
+			/* x轴偏移量 y轴偏移量 模糊度 颜色 */
+			text-shadow:2px 2px 4px #000;
+		}
+		.p2 {
+			color:#fff;
+			text-shadow:0 1px 0 #ccc,0 2px 0 #9c9c9c,0 3px 0 #bbb,0 4px 0 #9b9b9b,0 5px 0 #aaa;
+		}
+		.p3 {
+			color:rgba(0,0,0,0); text-shadow:0 0 5px blue;
+		}
+		.p4 {
+			text-shadow:0px 0px 10px #f3c,0px 0px 20px #f39,0px 0px 40px #f33,0px 0px 60px #f30;
+		}
+		.p5 {
+			color: #eee; text-shadow: 5px 5px 0 #666, 7px 7px 0 #eee;
+		}
+	</style>
+</head>
+<body>
+	<p class="p1">文字浮雕</p>
+	<p class="p2">立体字</p>
+	<p class="p3">模糊字</p>
+	<p class="p4">霓虹灯</p>
+	<p class="p5">Vintge/Retro text effect</p>
+</body>
+</html>

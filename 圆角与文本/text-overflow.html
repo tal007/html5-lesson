@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>text-overflow</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		p {
+			width: 200px;
+		}
+		.p1 {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		.p2 {
+			text-overflow: ellipsis;
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+		}
+	</style>
+</head>
+<body>
+	<!-- 文本超出 -->
+	<p class="p1">这只是一个测试这只是一个测试这只是一个测试这只是一个测试</p>
+	<p class="p2">这只是一个测试这只是一个测试这只是一个测试这只是一个测试</p>
+</body>
+</html>

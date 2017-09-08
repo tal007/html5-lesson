@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>文本书写模式</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		p {
+			width: 50px;
+			height: 50px;
+			border-bottom: 1px solid red;
+		}
+		.p1 {
+			direction: rtl;
+		}
+		.p2 {
+			direction: ltr;
+		}
+		.p3 {
+			unicode-bidi: bidi-override;
+			direction: rtl;
+		}
+		.p4 {
+			unicode-bidi: bidi-override;
+			direction: rtl;
+		}
+		.p4 span {
+			unicode-bidi: embed;
+			color: red;
+		}
+		.p5 {
+			writing-mode: horizontal-tb;
+		}
+		.p6 {
+			writing-mode: vertical-rl;
+		}
+		.p7 {
+			writing-mode: vertical-lr;
+		}
+		.p8 {
+			/*ie 的写法*/
+			writing-mode: lr-tb;
+		}
+		.p9 {
+			/*ie 的写法*/
+			writing-mode: tb-rl;
+		}
+		.p10 {
+			writing-mode: horizontal-tb;
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+		unicode-bidi 有三个广泛支持的值
+
+		normal 原来是什么顺序就使用什么顺序
+		embed 作用于inline元素，direction属性的值指定嵌入层，在对象内部进行隐式重排序
+		bidi-override 严格按照direction属性的值重排序。忽略隐式双向运算规则
+	 -->
+	<p class="p1">this is a test</p>
+	<p class="p2">this is a test</p>
+	<p class="p3">this is a test</p>
+	<p class="p4">this <span>is a</span> test</p>
+	<p class="p5">this is a test</p>
+	<p class="p6">this is a test</p>
+	<p class="p7">this is a test</p>
+	<p class="p8">this is a test</p>
+	<p class="p9">this is a test</p>
+	<p class="p10">this is a test</p>
+	<p class="p11">this is a test</p>
+</body>
+</html>
