@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>radial-gradient</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		div {
+			width: 400px;
+			height: 200px;
+			float: left;
+			border: 1px solid #000;
+			margin: 0 0 10px 10px;
+		}
+		.box1 {
+			background-image: radial-gradient(blue,red,yellow);
+		}
+
+		/* 控制position 使用 at 与关键词 */
+		.box2 {
+			background-image: radial-gradient(at left top,red,yellow);
+		}
+
+		/* 控制position 使用 at 与数值 */
+		.box3 {
+			background-image: radial-gradient(at 100px 200px,red,yellow);
+		}
+
+		/* 控制position 使用 at 与百分比 */
+		.box4 {
+			background-image: radial-gradient(at 10% 90%,blue,yellow);
+		}
+
+		/* 控制position 使用 at 与单个值 */
+		.box5 {
+			background-image: radial-gradient(at 90%,yellow,red,yellow);
+		}
+
+		/* 控制shape 使用 circle at left 为圆形 */
+		.box6 {
+			background-image: radial-gradient(circle at left,yellow,red,yellow);
+		}
+
+		/* 控制shape 使用 circle at left 为圆形 */
+		.box7 {
+			background-image: radial-gradient(closest-side circle,yellow,red,yellow);
+		}
+
+		/* 控制shape 使用 circle at left 为圆形 */
+		.box8 {
+			background-image: radial-gradient(closest-corner circle at left,yellow,red,yellow);
+		}
+
+		/* 控制shape 使用 circle at left 为圆形 */
+		.box9 {
+			background-image: radial-gradient(farthest-side circle,yellow,red,yellow);
+		}
+
+		/* 控制shape 使用 circle at left 为圆形 */
+		.box10 {
+			background-image: radial-gradient(farthest-corner circle at top,yellow,red,yellow);
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">默认的情况</div>
+	<div class="box2">控制position 使用 at 与关键词</div>
+	<div class="box3">控制position 使用 at 与数值</div>
+	<div class="box4">控制position 使用 at 与百分比</div>
+	<div class="box5">控制position 使用 at 与单个值</div>
+	<div class="box6">控制shape 使用 circle 为圆形</div>
+	<div class="box7">closest-side 半径为从圆心到最近边</div>
+	<div class="box8">closest-corner 半径为从圆心到最近角</div>
+	<div class="box9">farthest-side 半径为从圆心到最远边</div>
+	<div class="box10">farthest-corner 默认 半径为从圆心到最远角</div>
+</body>
+</html>
