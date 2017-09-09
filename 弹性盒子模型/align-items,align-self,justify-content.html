@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>align-items,align-self,justify-content</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.wrap {
+			margin: 50px auto 0;
+			width: 600px;
+			height: 500px;
+			border: 1px solid #000;
+			display: flex;
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+		}
+
+		#list {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#list li {
+			line-height: 2;
+			padding: 0 10px;
+			text-align: center;
+			cursor: pointer;
+			background: #F98E40;
+			margin-bottom: 10px;
+		}
+		#list li.on {
+			background: red;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap" class="wrap">
+		<div class="box">1</div>
+		<div class="box">2</div>
+		<div class="box">3</div>
+		<div class="box">4</div>
+		<div class="box">5</div>
+	</div>
+	<div id="list">
+		alignItems
+		<ul class="list1">
+			<li alignItems="flex-start">flex-start</li>
+			<li alignItems="flex-end">flex-end</li>
+			<li alignItems="center">center</li>
+			<li alignItems="baseline">baseline</li>
+			<li alignItems="stretch">stretch</li>
+		</ul>
+		alignSelf
+		<ul class="list2">
+			<li alignSelf="flex-start">flex-start</li>
+			<li alignSelf="flex-end">flex-end</li>
+			<li alignSelf="center">center</li>
+			<li alignSelf="baseline">baseline</li>
+			<li alignSelf="stretch">stretch</li>
+			<li alignSelf="auto">auto</li>
+		</ul>
+		justifyContent
+		<ul class="list3">
+			<li justifyContent="flex-start">flex-start</li>
+			<li justifyContent="flex-end">flex-end</li>
+			<li justifyContent="center">center</li>
+			<li justifyContent="space-between">space-between</li>
+			<li justifyContent="space-around">space-around</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		var oWrap = document.getElementById('wrap');
+		var oBox = document.getElementsByClassName('box');
+		Array.from(oBox).forEach( function(value, index) {
+			value.style.backgroundColor = 'hsl('+ 50*index +',100%,50%)';
+		});
+		
+		var oLis1 = document.querySelectorAll('#list .list1 li');
+		var oLis2 = document.querySelectorAll('#list .list2 li');
+		var oLis3 = document.querySelectorAll('#list .list3 li');
+		Array.from(oLis1).forEach( function(value, index) {
+			oLis1[0].className = 'on';
+			value.onclick = function(){
+				oWrap.style.alignItems = this.getAttribute('alignItems');
+				Array.from(oLis1).forEach((value)=>{
+					value.className = ''
+				})
+				this.className = 'on';
+			}
+		});
+		Array.from(oLis2).forEach( function(value, index) {
+			oLis2[0].className = 'on';
+			value.onclick = function(){
+				oBox[0].style.alignSelf = this.getAttribute('alignSelf');
+				Array.from(oLis2).forEach((value)=>{
+					value.className = ''
+				})
+				this.className = 'on';
+			}
+		});
+
+		Array.from(oLis3).forEach( function(value, index) {
+			oLis3[0].className = 'on';
+			value.onclick = function(){
+				oWrap.style.justifyContent = this.getAttribute('justifyContent');
+				Array.from(oLis3).forEach((value)=>{
+					value.className = ''
+				})
+				this.className = 'on';
+			}
+		});
+	</script>
+</body>
+</html>

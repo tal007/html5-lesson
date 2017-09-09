@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>order</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.wrap {
+			margin: 50px auto 0;
+			width: 600px;
+			height: 500px;
+			border: 1px solid #000;
+			display: flex;
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+		}
+		button {
+			position: absolute;
+			left: 50px;
+			top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap" class="wrap">
+		<div class="box" order="5">1</div>
+		<div class="box" order="4">2</div>
+		<div class="box" order="3">3</div>
+		<div class="box" order="2">4</div>
+		<div class="box" order="1">5</div>
+	</div>
+	<button id="btn">点击排序</button>
+
+
+	<script type="text/javascript">
+		var oWrap = document.getElementById('wrap');
+		var oBtn = document.getElementById('btn');
+		var oBox = document.getElementsByClassName('box');
+
+		var arr = [1,2,3,4,5];
+
+		Array.from(oBox).forEach( function(value, index) {
+			value.style.backgroundColor = 'hsl('+ 50*index +',100%,50%)';
+		});
+
+		oBtn.onclick = function(){
+			var newArr = [];
+			var num = Math.floor(Math.random()*5);
+			newArr = arr.splice(num, 1)
+			arr = arr.concat(newArr);
+
+			Array.from(oBox).forEach( function(value, index) {
+				value.style.order = arr[index]
+			});			
+		}
+	</script>
+</body>
+</html>

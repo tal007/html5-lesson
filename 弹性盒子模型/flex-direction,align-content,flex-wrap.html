@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>flex-direction,align-content,flex-wrap</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.wrap {
+			margin: 50px auto 0;
+			width: 400px;
+			height: 500px;
+			border: 1px solid #000;
+			display: flex;
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+		}
+
+		#list {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#list li {
+			line-height: 2;
+			padding: 0 10px;
+			text-align: center;
+			cursor: pointer;
+			background: #F98E40;
+			margin-bottom: 10px;
+		}
+		#list li.on {
+			background: red;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap" class="wrap">
+		<div class="box">1</div>
+		<div class="box">2</div>
+		<div class="box">3</div>
+		<div class="box">4</div>
+		<div class="box">5</div>
+	</div>
+	<div id="list">
+		flexDirection
+		<ul class="list1">
+			<li flexDirection="row">row</li>
+			<li flexDirection="row-reverse">row-reverse</li>
+			<li flexDirection="column">column</li>
+			<li flexDirection="column-reverse">column-reverse</li>
+		</ul>
+		alignContent
+		<ul class="list2">
+			<li alignContent="flex-start">flex-start</li>
+			<li alignContent="flex-end">flex-end</li>
+			<li alignContent="center">center</li>
+			<li alignContent="space-between">space-between</li>
+			<li alignContent="space-around">space-around</li>
+			<li alignContent="stretch">stretch</li>
+		</ul>
+		flexWrap
+		<ul class="list3">
+			<li flexWrap="nowrap">nowrap</li>
+			<li flexWrap="wrap">wrap</li>
+			<li flexWrap="wrap-reverse">wrap-reverse</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		var oWrap = document.getElementById('wrap');
+		var oBox = document.getElementsByClassName('box');
+		Array.from(oBox).forEach( function(value, index) {
+			value.style.backgroundColor = 'hsl('+ 50*index +',100%,50%)';
+		});
+		var oList = document.getElementById('list');
+		var oLis1 = document.querySelectorAll('#list .list1 li');
+		var oLis2 = document.querySelectorAll('#list .list2 li');
+		var oLis3 = document.querySelectorAll('#list .list3 li');
+		Array.from(oLis1).forEach( function(value, index) {
+			oLis1[0].className = 'on';
+			value.onclick = function(){
+				oWrap.style.flexDirection = this.getAttribute('flexDirection');
+				Array.from(oLis1).forEach((value)=>{
+					value.className = ''
+				})
+				this.className = 'on';
+			}
+		});	
+
+		/*
+		alignContent使用条件：
+			必须对父元素设置自由盒属性display:flex;，并且设置排列方式为横向排列flex-direction:row;并且设置换行，flex-wrap:wrap;这样这个属性的设置才会起作用。 
+		 */
+		
+		Array.from(oLis2).forEach( function(value, index) {
+			oLis2[0].className = 'on';
+			value.onclick = function(){
+				oWrap.style.alignContent = this.getAttribute('alignContent');
+				Array.from(oLis2).forEach((value)=>{
+					value.className = ''
+				})
+				this.className = 'on';
+			}
+		});
+
+		Array.from(oLis3).forEach( function(value, index) {
+			oLis3[0].className = 'on';
+			value.onclick = function(){
+				oWrap.style.flexWrap = this.getAttribute('flexWrap');
+				Array.from(oLis3).forEach((value)=>{
+					value.className = ''
+				})
+				this.className = 'on';
+			}
+		});	
+		
+	</script>
+</body>
+</html>

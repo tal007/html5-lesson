@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>flex-basis</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.wrap {
+			margin: 50px auto 0;
+			width: 500px;
+			height: 500px;
+			border: 1px solid #000;
+			display: flex;
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	
+	
+	<!-- 
+		flex-basis  与 width 没有多大的区别
+		
+
+		计算的方式：
+			父元素的盒子的宽度：500px;
+			子元素的盒子的宽度的和：50 + 100 +150 + 200 + 250 = 750px
+			超出父元素的宽度：750 - 500 = 250px
+			计算加权：50*1 + 100*1 +150*1 + 200*1 + 250*1 = 750   // 这里的 1 是flex-shrink的值
+			计算溢出量：
+				当前的宽度 * flex-shrink / 加权 * 溢出
+					50 	   * 	1 		 / 750  * 250
+
+	 -->
+
+	<script type="text/javascript">
+		var oBox = document.getElementsByClassName('box');
+		Array.from(oBox).forEach( function(value, index) {
+			value.style.backgroundColor = 'hsl('+ 50*index +',100%,50%)';
+			value.style.flexBasis = (index+1)*50+'px';
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>box-shadow</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div {
+			width: 200px;
+			height: 100px;
+			float: left;
+			background: orange;
+			margin: 0 0 10px 10px;
+		}
+		.box1 {
+			box-shadow: 2px 3px 4px rgba(0,0,0,.5);
+		}
+		.box2 {
+			box-shadow: 0px 5px 4px -4px #000;
+		}
+		.box3 {
+			/*box-shadow: 0px 5px 4px -4px #000,5px 0px 4px -4px #000;*/
+			box-shadow: 3px 3px 6px -3px #000;
+		}
+		.box4 {
+			box-shadow: 5px 0px 5px -5px #000,-5px 0px 5px -5px #000;
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+		box-shadow: x y blur 模糊 颜色 （inset）;
+	 -->
+	 <!-- 正常的阴影 -->
+	<div class="box1"></div>
+	<!-- 只有底边有阴影 -->
+	<div class="box2"></div>
+	<!-- 领边阴影 -->
+	<div class="box3"></div>
+	<!-- 双侧阴影 -->
+	<div class="box4"></div>
+</body>
+</html>

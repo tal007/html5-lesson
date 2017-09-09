@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>不规则投影</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div {
+			position: relative;
+			float: left;
+			margin: 0 0 30px 30px;
+			width: 200px;
+			height: 200px;
+			background: yellow;
+			box-shadow: 2px 2px 5px red;
+		}
+		.box1 {
+			border-radius: 50%;
+		}
+		.box2,.box3 {
+			border-radius: 5px;
+		}
+		.box2::after,.box3::after {
+			content: '';
+			display: block;
+			width: 0px;
+			height: 0px;
+			border: 15px solid transparent;
+			border-left-color: yellow;
+			position: absolute;
+			right: -30px;
+			top: 85px;
+		}
+		.box3 {
+			box-shadow: none;
+			filter: drop-shadow(2px 2px 5px red);
+		}
+		.box4,.box5 {
+			width: 160px;
+			height: 160px;
+			background: transparent;
+			border: 20px dotted orange;
+		}
+		.box5 {
+			box-shadow: none;
+			filter: drop-shadow(2px 2px 5px red);
+		}
+	</style>
+</head>
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+	<div class="box3"></div>
+	<div class="box4"></div>
+	<div class="box5"></div>
+</body>
+</html>
