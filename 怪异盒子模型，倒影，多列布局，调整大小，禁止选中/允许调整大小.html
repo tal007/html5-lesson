@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>允许调整大小</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		div {
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			float: left;
+			margin: 0 0 10px 10px;
+		}
+		.box1 {
+			/* resize 必须结合 overflow 属性一起使用否则无效 */
+			resize: both;
+			overflow: auto;
+		}
+		.box2 {
+			/* resize 必须结合 overflow 属性一起使用否则无效 */
+			resize: none;
+			overflow: auto;
+		}
+		.box3 {
+			/* resize 必须结合 overflow 属性一起使用否则无效 */
+			resize: horizontal;
+			overflow: auto;
+		}
+		.box4 {
+			/* resize 必须结合 overflow 属性一起使用否则无效 */
+			resize: vertical;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">auto</div>
+	<div class="box2">none</div>
+	<div class="box3">horizontal</div>
+	<div class="box4">vertical</div>
+</body>
+</html>
