@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <meta charset="uft-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+    <button onclick="getDateTime()">获得日期和时间</button>
+    <div id="dt">Tue Sep 12 2017 19:04:32 GMT+0800 (中国标准时间)</div>
+    <script>
+    function getDateTime() {
+        var d = new Date();
+        document.getElementById("dt").innerHTML = d;
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>通过range修改背景颜色</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	R：<input type="range" min="0" max="255" name="" id="r"><br>
+	G：<input type="range" min="0" max="255" name="" id="g"><br>
+	B：<input type="range" min="0" max="255" name="" id="b"><br>
+
+	<script type="text/javascript">
+		var oR = document.getElementById('r'),
+			oG = document.getElementById('g'),
+			oB = document.getElementById('b');
+
+		function changeValue(){
+			var r = oR.value,
+				g = oG.value,
+				b = oB.value;
+			document.body.style.backgroundColor = 'rgb('+ r +','+ g +','+ b+')'
+		}
+		changeValue();
+		oR.addEventListener('change', changeValue, false)
+		oG.addEventListener('change', changeValue, false)
+		oB.addEventListener('change', changeValue, false)
+	</script>
+</body>
+</html>
