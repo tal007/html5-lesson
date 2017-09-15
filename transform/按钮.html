@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>按钮</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		a {
+			display: inline-block;
+		    border: none;
+		    border-radius: .3em;
+		    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
+		    color: #fff;
+		    cursor: pointer;
+		    font-family: 'Raleway', sans-serif;
+		    font-weight: 300;
+		    line-height: 1.5;
+		    letter-spacing: 1px;
+		    padding: .5em 1.5em .75em;
+		    position: relative;
+		    text-decoration: none;
+		    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25);
+		    vertical-align: middle;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		    background: #3498db;
+		}
+	</style>
+</head>
+<body>
+	<a id="btn">按钮</a>
+
+
+	<script type="text/javascript">
+		const btn = document.getElementById('btn');
+		let prevStyle = null;
+		btn.onmousedown = function(){
+			prevStyle = getStyle(this,'box-shadow')
+			console.log(prevStyle);
+			this.style.boxShadow = 'initial'
+		}
+
+		btn.onmouseup = function(){
+			this.style.boxShadow = prevStyle
+		}
+	
+		function getStyle(obj,attr){
+			return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle(obj)[attr]
+		}
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>轮播</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		ol,ul {
+			list-style: none;
+		}
+		#box {
+			position: relative;
+			margin: 50px auto;
+			width: 600px;
+			height: 400px;
+			border: 1px solid #000;
+		}
+		#box ul {
+			position: absolute;
+		}
+		#box li {
+			width: 50px;
+			height: 50px;
+			/*box-shadow: 0 0 5px red;*/
+			float: left;
+			transition: all 1s;
+			opacity: 0;
+		}
+		#prev,#next {
+			position: absolute;
+			bottom: -40px;
+			width: 100px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			background: blue;
+			cursor: pointer;
+			color: white;
+			-webkit-user-select: none;
+		}
+		#next {
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul class="list"></ul>
+		<ul class="list"></ul>
+		<ul class="list"></ul>
+		<ul class="list"></ul>
+		<ul class="list"></ul>
+
+		<div id="prev">上</div>
+		<div id="next">下</div>
+	</div>
+
+	<script type="text/javascript">
+		const oBox = document.getElementById('box'),
+			prev = document.getElementById('prev'),
+			next = document.getElementById('next'),
+			oLists = Array.from(document.getElementsByClassName('list')),
+			area = 400*600/50/50;
+		let n = 0;
+
+		oLists.forEach((value,index)=>{
+			for (var i = 0; i < area; i++) {
+				let li = document.createElement('li');
+				li.style.backgroundImage = 'url(img/'+index+'.jpg)'
+				li.style.transitionDelay = i/100 + 's'
+				// 使用 js 修改背景定位值
+				li.style.backgroundPositionX = -i%12*50 + 'px'
+				li.style.backgroundPositionY = -Math.floor(i/12)*50 + 'px'
+				value.appendChild(li);
+
+				if( index == 0) {
+					li.style.opacity = 1;
+				}
+			}
+			// value.style.backgroundImage = 'url(img/'+index+'.jpg)'
+		})
+
+		prev.onclick = function(){
+			let oLis1 = Array.from(oLists[n].getElementsByTagName('li'));
+			oLis1.forEach((value,index)=>{
+				value.style.opacity = 0;
+				value.style.transform = 'rotate(180deg)'
+				// value.style.borderRadius = '50%'
+				end(value)
+			})
+			n <= 0? n = oLists.length - 1:n--;
+			let oLis2 = Array.from(oLists[n].getElementsByTagName('li'));
+			oLis2.forEach((value,index)=>{
+				value.style.transform = 'rotate(0deg)'
+				value.style.opacity = 1;
+			})
+		}
+		next.onclick = function(){
+			let oLis1 = Array.from(oLists[n].getElementsByTagName('li'));
+			oLis1.forEach((value,index)=>{
+				value.style.transform = 'rotate(180deg)'
+				// value.style.borderRadius = '50%'
+				value.style.opacity = 0;
+				end(value)
+			})
+			n >= oLists.length - 1? n = 0:n++;
+			let oLis2 = Array.from(oLists[n].getElementsByTagName('li'));
+			oLis2.forEach((value,index)=>{
+				value.style.transform = 'rotate(0deg)'
+				value.style.opacity = 1;
+			})
+		}
+\
+		function end(obj){
+			obj.addEventListener('webkitTransitionEnd', ()=>{
+				obj.style.transform = 'rotate(0deg)'
+			},false)
+			obj.addEventListener('transitionEnd', ()=>{
+				obj.style.transform = 'rotate(0deg)'
+			},false)
+		}
+	</script>
+</body>
+</html>

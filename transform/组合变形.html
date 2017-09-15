@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>组合变形</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;padding: 0;
+		}
+		.box {
+			width: 600px;
+			height: 400px;
+			border: 1px solid #000;
+		}
+		p {
+			width: 100px;
+			height: 100px;
+			transition: all 1s;
+		}
+		p:nth-child(1) {
+			background: red;
+		}
+		p:nth-child(2) {
+			background: orange;
+		}
+		p:nth-child(3) {
+			background: yellow;
+		}
+		p:nth-child(4) {
+			background: green;
+		}
+		.box:hover p:nth-child(1) {
+			transform: rotate(30deg) scale(.8) translate(200px) skew(20deg);
+		}
+		.box:hover p:nth-child(2) {
+			transform: scale(.8) translate(200px) rotate(30deg) skew(20deg);
+		}
+		.box:hover p:nth-child(3) {
+			transform: translate(200px) rotate(30deg) scale(.8) skew(20deg);
+		}
+		.box:hover p:nth-child(4) {
+			transform: rotate(30deg) skew(20deg) scale(.8) translate(200px);
+		}
+	</style>
+</head>
+<body>
+	<!-- 组合变形 因为顺序不同，最后的结果也是不一样的 -->
+	<div class="box">
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+	</div>
+</body>
+</html>
