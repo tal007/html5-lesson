@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>时差动画</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;padding: 0;
+		}
+		ul,ol {
+			list-style: none;
+		}
+		#box {
+			margin: 60px auto 0;
+			width: 1100px;
+			height: 500px;
+			/*border: 1px solid #000;*/
+		}
+		.shadow {
+			margin-bottom: 10px;
+			height: 1px;
+			box-shadow: 2px 2px 5px #00ff00;
+		}
+
+		.list li{
+			float:left;
+			width:214px;
+			height:300px;
+			background:url("images/bg_icon.png") no-repeat;
+			margin:30px; 
+			position:relative; 
+			cursor:pointer;
+			overflow:hidden;
+		}
+		.list li:nth-child(1){background-color:#00A0EA;}
+		.list li:nth-child(2){background-color:#97C412;}
+		.list li:nth-child(3){background-color:#ED9644;}
+		.list li:nth-child(4){background-color:#5CC8B0;}
+		.icon {
+			margin-top: 35px;
+			margin-left: 5px;
+			text-align: center;
+			line-height: 160px;
+		}
+		.icon img {
+			width: 80px;
+			height: 80px;
+			transition: 1s;
+		}
+		.info,.more {
+			position: absolute;
+			color: #fff;
+			text-shadow:2px 2px 5px #000;
+			text-transform:uppercase;
+			transition: 1s .5s;
+		}
+		.info {
+			text-align: center;
+			bottom: 30px;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+		}
+		.info h1,.more h1 {
+			font-size: 30px;
+			font-weight: 400;
+		}
+		.info p,.more p {
+			margin: 5px 0;
+		}
+		.info .btn{
+			width:100px;
+			line-height:30px;
+			background:rgba(0,0,0,0.2);
+			margin:0 auto;
+		}
+		.more {
+			bottom:-10px;
+			left:214px;
+			width:174px;
+			background:rgba(0,0,0,0.4);
+			padding:20px;
+			transition: 1s;
+		}		
+		.more hgroup {
+			border-left: 5px solid white;
+			padding-left: 10px;
+		}
+		.lesson {
+			word-break: break-all;
+		}
+		
+		.list li:hover{background-image:none;}
+		.list li:hover .info{
+			bottom:-130px;
+		}
+		.list li:hover .more {
+			left:0px;
+			transition-delay:1s;
+		}
+		.list li:hover .icon img{
+			width:100px;
+			height:100px;
+			transform:rotate(360deg);
+		}		
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="shadow"></div>
+		<ul class="list">
+			<li>
+				<div class="icon"><img src="images/html.png"></div>
+				<section class="info">
+					<hgroup>
+						<h1>网页制作</h1>
+						<p>HTML</p>
+					</hgroup>
+					<div class="btn">立即查看</div>
+				</section>
+				<section class="more">
+					<hgroup>
+						<h1>网页制作</h1>
+						<p>HTML</p>
+					</hgroup>
+					<p class="lesson">课程：html+div+css+项目实战，2个月一期。</p>
+				</section>
+			</li>
+			<li>
+				<div class="icon"><img src="images/html5.png"></div>
+				<section class="info">
+					<hgroup>
+						<h1>响应网站</h1>
+						<p>HTML5</p>
+					</hgroup>
+					<div class="btn">立即查看</div>
+				</section>
+				<section class="more">
+					<hgroup>
+						<h1>响应网站</h1>
+						<p>HTML5</p>
+					</hgroup>
+					<p class="lesson">课程:html5+css3+手机网站+响应式网站2个月一期。</p>
+				</section>
+			</li>
+			<li>
+				<div class="icon"><img src="images/js.png"></div>
+				<section class="info">
+					<hgroup>
+						<h1>网站特效</h1>
+						<p>JS/JQ</p>
+					</hgroup>
+					<div class="btn">立即查看</div>
+				</section>
+				<section class="more">
+					<hgroup>
+						<h1>网站特效</h1>
+						<p>JS/JQ</p>
+					</hgroup>
+					<p class="lesson">课程:javascript系统学习，目标互联网所有特效。</p>
+				</section>
+			</li>
+			<li>
+				<div class="icon"><img src="images/demo.png"></div>
+				<section class="info">
+					<hgroup>
+						<h1>网站特训班</h1>
+						<p>CMS</p>
+					</hgroup>
+					<div class="btn">立即查看</div>
+				</section>
+				<section class="more">
+					<hgroup>
+						<h1>网站特训班</h1>
+						<p>CMS</p>
+					</hgroup>
+					<p class="lesson">课程:从0开始静态页面开发到动态网站制作</p>
+				</section>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
