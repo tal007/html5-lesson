@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4、二次贝塞尔曲线</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+</head>
+<body>
+	<canvas id="canvas">你的浏览器不支持canvas，请使用最新版本的浏览器。</canvas>
+
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		
+		// quadratic [kwɑ'drætɪk]  二次 curve [kɝv] 曲线 to
+		// ctx.strokeStyle = 'lime'
+		// 必须结合 moveTo 使用
+		ctx.moveTo(20,20)
+		ctx.quadraticCurveTo(20,100,200,20)
+		ctx.stroke()
+	</script>
+</body>
+</html>

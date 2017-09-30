@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>3、绘制圆形</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+</head>
+<body>
+	<canvas id="canvas">你的浏览器不支持canvas，请使用最新版本的浏览器。</canvas>
+
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		
+		ctx.fillStyle = 'red';
+		// 注意使用弧度 Math.PI  的地方
+		ctx.arc(50,50,50,Math.PI*0.5,2*Math.PI,true)
+		ctx.fill()
+		// ctx.beginPath();  使用beginPath重新计算起点
+		ctx.arc(150,150,50,0,2*Math.PI,true)
+		ctx.fill()
+	</script>
+</body>
+</html>

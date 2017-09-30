@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas的用法</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+</head>
+<body>
+	<canvas id="canvas">你的浏览器不支持canvas，请使用最新版本的浏览器。</canvas>
+
+
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+
+		var ctx = canvas.getContext('2d');
+		
+		// 定义的颜色是对以后的画布生效，之前的没用
+		ctx.fillStyle='red';
+		ctx.fillRect(10,10,50,50);
+		ctx.fillStyle='lime';
+		ctx.fillRect(30,30,50,50);
+		ctx.clearRect(20,20,50,50)
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>一个简单的 canvas 的效果</title>
+	<style>
+		* {
+			margin: 0;padding: 0;
+		}
+		html,body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		canvas {
+			background-color: #000;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas">你的浏览器不支持canvas效果，请使用最新版本的浏览器！</canvas>
+	
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		var w = window.innerWidth || document.body.clientWidth,
+			h = window.innerHeight || document.body.clientHeight,
+			count = (w*h/3000)|0,
+//			线条的移动速度
+			speed = 4,
+			range = 80,
+//			线条的透明度
+			lineAlpha = .05,
+			
+// 			粒子
+			particles = [],
+			huePart = 360/count;
+		
+//		 获取浏览器视口的宽高 并 设置 canvas 的宽高
+			
+			canvas.width = w;
+			canvas.height = h;
+		
+//		窗口发生变化时改变canvas 的宽高
+		window.onresize = function(){
+			w = window.innerWidth || document.body.clientWidth,
+			h = window.innerHeight || document.body.clientHeight;
+			canvas.width = w;
+			canvas.height = h;
+		}
+		
+	for(var i = 0; i < count; ++i) {
+		particles.push(new Particle((huePart * i) | 0));
+	}
+	function Particle(hue){
+		this.x = Math.random()*w;
+		this.y = Math.random()*h;
+		this.vx = (Math.random()-.5)*speed;
+		this.vy = (Math.random()-.5)*speed;
+
+		this.hue = hue;
+	}
+	Particle.prototype.update = function(){
+		this.x += this.vx;
+		this.y += this.vy;
+
+		if(this.x < 0 || this.x > w) this.vx *= -1;
+		if(this.y < 0 || this.y > h) this.vy *= -1;
+	}
+
+	function checkDist(a, b, dist){
+		var x = a.x - b.x,
+			y = a.y - b.y;
+
+		return x*x + y*y <= dist*dist;
+	}
+
+	function anim(){
+		window.requestAnimationFrame(anim);
+
+		ctx.fillStyle = 'rgba(0, 0, 0, .05)';
+		ctx.fillRect(0, 0, w, h);
+
+		for(var i = 0; i < particles.length; ++i){
+			var p1 = particles[i];
+			p1.update();
+
+			for(var j = i+1; j < particles.length; ++j){
+				var p2 = particles[j];
+				if(checkDist(p1, p2, range)){
+					ctx.strokeStyle = 'hsla(hue, 80%, 50%, alp)'
+						.replace('hue', ((p1.hue  + p2.hue + 3)/2) % 360)
+						.replace('alp', lineAlpha);
+					ctx.beginPath();
+					ctx.moveTo(p1.x, p1.y);
+					ctx.lineTo(p2.x, p2.y);
+					ctx.stroke();
+				}
+			}
+		}
+	}
+
+	anim();
+	</script>
+</body>
+</html>

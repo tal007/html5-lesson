@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>驴妈妈手机布局</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;padding: 0;
+		}
+		#wrap {
+			margin: 30px auto 0;
+			width: 417px;
+			background: #fff;
+			/*border: 1px solid rgba(0,0,0,.2);*/
+			padding: 5px;
+			box-sizing: border-box;
+		}
+		#wrap .item {
+			border-radius: 5px;
+			display: flex;
+		}
+		#wrap .item + .item {
+			margin-top: 4px;
+		}
+		.tickets {
+			height: 112px;
+			background: #ec4c40;
+		}
+		.tickets .left {
+			text-indent: -9999px;
+			background: url(./img/ticket.png) no-repeat 0 0/cover;
+		}
+		.hotal {
+			height: 74px;
+			background: #f8791c;
+		}
+		.hotal .left {
+			text-indent: -9999px;
+			background: url(./img/hotel.png) no-repeat 0 0/cover;
+		}
+		.travel {
+			height: 172px;
+			background: #7ec553;
+		}
+		.travel .left {
+			text-indent: -9999px;
+			background: url(./img/tourism.png) no-repeat 0 0/cover;
+		}
+		.others {
+			height: 74px;
+			background: #5598dc;
+		}
+		#wrap .item div {
+			display: flex;
+			flex: 1;
+			color: #fff;
+		}
+		#wrap .item div:not(.left){
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+		}
+		#wrap .item>div + div {
+			border-left: 2px solid #fff;
+		}
+		.middle,.bottom {
+			border-top: 2px solid #fff;
+		}
+		#wrap .item.others .left {
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+		}
+		.others div {
+			flex-direction: row !important;
+			line-height: 74px;
+		}
+		.others img {
+			width: 36px;
+			height: 35px;
+			margin-right: 5px;
+			margin-top: calc((74px - 35px) / 2);
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="item tickets">
+			<div class="left">门票</div>
+			<div class="center">
+				<div class="top">境外门票</div>
+				<div class="bottom">王牌景区</div>
+			</div>
+			<div class="right">
+				<div class="top">境外玩乐</div>
+				<div class="bottom">国内玩乐</div>
+			</div>
+		</div>
+		<div class="item hotal">
+			<div class="left">酒店</div>
+			<div class="center">酒+景</div>
+			<div class="right">机+酒</div>
+		</div>
+		<div class="item travel">
+			<div class="left">旅游度假</div>
+			<div class="center">
+				<div class="top">国内游</div>
+				<div class="middle">出境游</div>
+				<div class="bottom">驴悦亲子游</div>
+			</div>
+			<div class="right">
+				<div class="top">周边游</div>
+				<div class="middle">邮轮</div>
+				<div class="bottom">开心驴游</div>
+			</div>
+		</div>
+		<div class="item others">
+			<div class="left"><img src="img/plane.png"><span>机票</span></div>
+			<div class="center"><img src="img/train.png"><span>火车票</span></div>
+			<div class="right"><img src="img/pass.png"><span>签证</span></div>
+		</div>
+	</div>
+</body>
+</html>

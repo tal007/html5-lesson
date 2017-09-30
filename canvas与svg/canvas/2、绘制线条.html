@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>绘制路径</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+</head>
+<body>
+	<canvas id="canvas">你的浏览器不支持canvas，请使用最新版本的浏览器。</canvas>
+
+	<script type="text/javascript">
+		var ctx = document.getElementById('canvas').getContext('2d');
+		ctx.moveTo(10,10);
+		ctx.lineTo(20,10);
+		ctx.lineTo(20,20);
+		// 使用moveTo改变起点
+		ctx.moveTo(10,10);
+		ctx.lineTo(20,20);
+
+		ctx.moveTo(100,100);
+		ctx.lineTo(40,60);
+		ctx.stroke()
+	</script>
+</body>
+</html>

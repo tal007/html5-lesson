@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form name="passwordChange">
+        <p><label for="password1">New Password:</label>
+        <input type="password" id="password1" onchange="checkPasswords()"></p>
+        <p><label for="password2">Confirm Password:</label>
+        <input type="password" id="password2" onchange="checkPasswords()"></p>
+    </form>
+    <button onclick="document.passwordChange.password1.checkValidity()">Check Validity</button>
+    <script>
+        function checkPasswords() {
+            var pass1 = document.getElementById("password1");
+            var pass2 = document.getElementById("password2");
+     
+            if (pass1.value != pass2.value)
+                pass1.setCustomValidity("两次输入的密码不匹配");
+            else
+                pass1.setCustomValidity("");
+        }
+
+
+        /*
+            ## 表单验证
+            validity对象，通过下面的valid可以查看验证是否通过，如果八种验证都通过返回true，一种验证失败返回false
+            oText.addEventListener("invalid",fn1,false);
+            ev.preventDefault()
+            valueMissing  :  输入值为空时 	返回的是true
+            typeMismatch :  控件值与预期类型不匹配 	返回的是true
+            patternMismatch  :  输入值不满足pattern正则 	返回的是true
+            tooLong  :  超过maxLength最大限制     超出的返回的是true
+            rangeUnderflow : 验证的range最小值 
+            rangeOverflow：验证的range最大值
+            stepMismatch: 验证range 的当前值 是否符合min、max及step的规则
+            customError 不符合自定义验证   是不是匹配 true
+            setCustomValidity(); 自定义验证
+            Invalid事件  :  验证反馈 input.addEventListener('invalid',fn,false)
+            阻止默认验证：ev.preventDefault()
+            formnovalidate属性  :  关闭验证
+        */
+    </script>
+</body>
+</html>

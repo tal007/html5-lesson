@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>毛玻璃2</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		* {
+			margin: 0;padding: 0;
+		}
+		html,body {
+			width: 100%;
+			height: 100%;
+        	font: 16px/1.6 微软雅黑;
+		}
+
+		body,section::before {
+	        background: url("http://g.hiphotos.baidu.com/image/pic/item/8694a4c27d1ed21bd85def25a46eddc450da3f5e.jpg") 0 / cover fixed;
+	    }
+
+	    section {
+	        position: absolute;
+	        left: 0;
+	        top: 0;
+	        right: 0;
+	        bottom: 0;
+	        margin: auto;
+	        padding: 24px;
+	        width: 600px;
+	        height: 324px;
+	        box-sizing: border-box;
+	        background: hsla(0, 0%, 100%, .25) border-box;
+	        overflow: hidden;
+	        border-radius: 5px;
+	        box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .3) inset,
+	        0 .5em 1em rgba(0, 0, 0, 0.6);
+	        text-shadow: 0 1px 1px hsla(0, 0%, 100%, .3);
+	    }
+
+		section::before {
+	        content: '';
+	        position: absolute;
+	        top: 0;
+	        right: 0;
+	        bottom: 0;
+	        left: 0;
+	        z-index: -1;
+	        -webkit-filter: blur(20px);
+	        filter: blur(20px);
+	    }
+	    p {
+	    	margin: 24px 40px;
+	    	text-indent: 2em;
+	    }
+	    footer {
+	    	text-align: right;
+	    	padding-right: 40px;
+	    	font-weight: 900;
+	    }
+	</style>
+</head>
+<body>
+	<section>
+		<p>当我年轻的时候，我梦想改变这个世界；当我成熟以后，我发现我不能够改变这个世界，我将目光缩短了些，决定只改变我的国家；当我进入暮年以后，我发现我不能够改变我们的国家，我的最后愿望仅仅是改变一下我的家庭，但是，这也不可能。当我现在躺在床上，行将就木时，我突然意识到：如果一开始我仅仅去改变我自己，然后，我可能改变我的家庭；在家人的帮助和鼓励下，我可能为国家做一些事情；然后，谁知道呢?我甚至可能改变这个世界。</p>
+		<footer>—
+            <span>英国威斯敏斯特教堂的地下室里一块墓碑的一句话</span>
+		</footer>
+	</section>
+
+	<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
+	<script type="text/javascript">
+	   $youziku.load("body", "720473532bf4478787ad93aa5a695cef", "Source-Han-Light");
+	   /*$youziku.load("#id1,.class1,h1", "720473532bf4478787ad93aa5a695cef", "Source-Han-Light");*/
+	   /*．．．*/
+	   $youziku.draw();
+	</script>
+</body>
+</html>

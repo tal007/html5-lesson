@@ -28,7 +28,7 @@
 			height: 50px;
 			/*box-shadow: 0 0 5px red;*/
 			float: left;
-			transition: all 1s;
+			transition: all 1s cubic-bezier(.58,1.87,.85,-0.53);
 			opacity: 0;
 		}
 		#prev,#next {
@@ -89,14 +89,14 @@
 			let oLis1 = Array.from(oLists[n].getElementsByTagName('li'));
 			oLis1.forEach((value,index)=>{
 				value.style.opacity = 0;
-				value.style.transform = 'rotate(180deg)'
+				value.style.transform = 'rotate(180deg) scale(0)'
 				// value.style.borderRadius = '50%'
 				end(value)
 			})
 			n <= 0? n = oLists.length - 1:n--;
 			let oLis2 = Array.from(oLists[n].getElementsByTagName('li'));
 			oLis2.forEach((value,index)=>{
-				value.style.transform = 'rotate(0deg)'
+				value.style.transform = 'rotate(0deg) scale(1)'
 				value.style.opacity = 1;
 			})
 		}
@@ -115,13 +115,12 @@
 				value.style.opacity = 1;
 			})
 		}
-\
 		function end(obj){
 			obj.addEventListener('webkitTransitionEnd', ()=>{
-				obj.style.transform = 'rotate(0deg)'
+				obj.style.transform = 'rotate(0deg) scale(1)'
 			},false)
 			obj.addEventListener('transitionEnd', ()=>{
-				obj.style.transform = 'rotate(0deg)'
+				obj.style.transform = 'rotate(0deg) scale(1)'
 			},false)
 		}
 	</script>

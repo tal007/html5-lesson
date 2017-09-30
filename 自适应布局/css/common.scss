@@ -1,0 +1,26 @@
+// 清楚默认的样式
+* {
+    margin: 0;padding: 0;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+img {
+    border: none;
+    vertical-align: middle;
+}
+input {
+    outline: none;
+}
+
+
+// 通用的 class 属性
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}

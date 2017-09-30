@@ -1,0 +1,275 @@
+// 当以常量
+$hHeight: 50px;
+
+// 定义函数
+@mixin fl {
+    float: left;
+}
+
+@mixin fr {
+    float: right;
+}
+
+@mixin clearfix {
+    zoom: 1;
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+// header的样式
+#header {
+    position: relative;
+    width: 100%;
+    height: $hHeight;
+    line-height: $hHeight;
+    font-size: 15px;
+
+    // logo
+    a.logo {
+        width: 173px;
+        text-align: center;
+        display: inline-block;
+        
+        img {
+            width: 108px;
+            height: 23px;
+        }
+    }
+
+    // nav
+    nav.nav {
+        &::before {
+            display: none;
+        }
+
+        li {
+            @include fl;
+            width: 96px;
+            text-align: center;
+            cursor: pointer;
+    
+            a {
+                color: #000;
+            }
+    
+            &:hover a {
+                border-bottom: 2px solid #000;
+            }
+        }
+    }
+
+    // rSection
+    .rSection  {
+        form {
+            position: relative;
+
+            .search {
+                width: 264px;
+                height: 36px;
+                line-height: 37px;
+                font-size: 16px;
+                text-indent: 10px;
+                border: 1px solid rgba(0,0,0,.4);
+
+                &:focus {
+                    border-color: #0067B8;
+                }
+            }
+
+            .btn {
+                position: absolute;
+                top: 10px;
+                right: 0;
+                width: 34px;
+                height: 32px;
+                background: transparent;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                font-size: 20px;
+                transform: scale(-1,1);
+            }
+        }
+
+        .shopcar {
+            margin: 0 10px;
+            font-size: 20px;
+            color: rgba(0,0,0,.5);
+            vertical-align: middle;
+
+            span {
+                display: inline-block;
+                font-size: 12px;
+                vertical-align: middle;
+                margin-top: 2px;
+            }
+        }
+
+        .login {
+            padding: 0 20px;
+            cursor: pointer;
+        }
+    } 
+}
+
+// banner
+.banner {
+    width: 100%;
+    height: auto;
+    position: relative;
+
+    li {
+        position: absolute;
+        left: 0;top: 0;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    
+    
+    .text {
+        position: absolute;
+        left: 0;top: 0;
+    }
+
+    .btn {
+        position: absolute;
+        top: 50%;
+        margin-top: -24px;
+        width: 24px;
+        height: 48px;
+        background: rgba(0,0,0,.5);
+    }
+    .btn-left {
+        left: 0;
+    }
+    .btn-right {
+        right: 0;
+    }
+}
+
+// four
+.four {
+    margin-top: 40px;
+    padding: 0 20px;
+
+    h1 {
+        margin-bottom: 10px;
+        padding-left: 12px;
+    }
+
+    .items {
+        display: flex;
+        .item {
+            flex: 1;
+            padding: 0 12px 50px;
+            
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+// 响应式布局样式
+@media screen and (min-width: 1084px) {
+    body {
+        padding: 0 50px;
+    }
+    #header {
+        // width: calc(100% - 100px);
+        // margin: 0 50px;
+
+        .logo {
+            margin-left: -30px;
+        }
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1083px) {
+    #header {
+        width: 100%;
+
+        .rSection {
+            form{
+                .search {
+                    width: 0;
+                    border: none;
+                }
+            }
+        }
+    }
+    .four .items {
+        flex-flow: wrap row;
+        
+        .item {
+            flex-basis: calc(50% - 24px);
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #header {
+        width: 100%;
+
+        a.logo {
+            position: absolute;
+            left: calc((100% - 173px) / 2);
+        }
+
+        nav.nav {
+            width: 48px;
+            cursor: pointer;
+            
+            &::before {
+                display: block;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            li {
+                display: none;
+            }
+        }
+
+        .rSection {
+            form{
+                .search {
+                    width: 0;
+                    border: none;
+                }
+            }
+            .login {
+                display: none;
+            }
+        }
+    }
+    .banner .text {
+        position: static;
+        height: 280px;
+        background: red;
+    }
+    
+    .four .items {
+        flex-flow: wrap row;
+        
+        .item {
+            flex-basis: calc(50% - 24px);
+        }
+    }
+}
+
+@media screen and (max-width: 539px) {
+    .four .items {
+        flex-flow: wrap row;
+        
+        .item {
+            flex-basis: 100%;
+        }
+    }
+}

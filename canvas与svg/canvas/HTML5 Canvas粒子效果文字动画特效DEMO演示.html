@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://www.jq22.com/demo/html5-canvas-side-text-141115160302/ -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>HTML5 Canvas粒子效果文字动画特效DEMO演示</title>
+    <link rel="stylesheet" href="textDemo/normalize.css">
+    <link rel="stylesheet" href="textDemo/style.css" media="screen" type="text/css">
+    <style id="style-1-cropbar-clipper">
+    /* Copyright 2014 Evernote Corporation. All rights reserved. */
+
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255, 255, 255, .38) solid !important;
+        border-radius: 4px !important;
+    }
+
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style>
+</head>
+
+<body class="body--ready" cz-shortcut-listen="true">
+    <canvas class="canvas" width="1366" height="648"></canvas>
+    <div class="help">?</div>
+    <div class="ui">
+        <input class="ui-input" type="text">
+        <span class="ui-return">↵</span>
+    </div>
+    <div class="overlay">
+        <div class="tabs">
+            <div class="tabs-labels"><span class="tabs-label tabs-label--active">Commands</span><span class="tabs-label">Info</span><span class="tabs-label">Share</span></div>
+            <div class="tabs-panels">
+                <ul class="tabs-panel commands tabs-panel--active">
+                    <li class="commands-item"><span class="commands-item-title">Text</span><span class="commands-item-info" data-demo="Hello :)">Type anything</span><span class="commands-item-action">Demo</span></li>
+                    <li class="commands-item"><span class="commands-item-title">Countdown</span><span class="commands-item-info" data-demo="#countdown 10">#countdown<span class="commands-item-mode">number</span></span><span class="commands-item-action">Demo</span></li>
+                    <li class="commands-item"><span class="commands-item-title">Time</span><span class="commands-item-info" data-demo="#time">#time</span><span class="commands-item-action">Demo</span></li>
+                    <li class="commands-item"><span class="commands-item-title">Rectangle</span><span class="commands-item-info" data-demo="#rectangle 30x15">#rectangle<span class="commands-item-mode">width x height</span></span><span class="commands-item-action">Demo</span></li>
+                    <li class="commands-item"><span class="commands-item-title">Circle</span><span class="commands-item-info" data-demo="#circle 25">#circle<span class="commands-item-mode">diameter</span></span><span class="commands-item-action">Demo</span></li>
+                    <li class="commands-item commands-item--gap"><span class="commands-item-title">Animate</span><span class="commands-item-info" data-demo="The time is|#time|#countdown 3|#icon thumbs-up"><span class="commands-item-mode">command1</span>&nbsp;|<span class="commands-item-mode">command2</span></span><span class="commands-item-action">Demo</span></li>
+                </ul>
+                <div class="tabs-panel ui-details">
+                    <div class="ui-details-content">
+                        <h1>Shape Shifter</h1>
+                        <p>
+                            An experiment by Kenneth Cachia.
+                            <br> Font Awesome is being used to render all #icons.
+                        </p>
+                        <br>
+                        <p>Visit Shape Shifter to use icons.</p>
+                    </div>
+                </div>
+                <div class="tabs-panel ui-share">
+                    <div class="ui-share-content">
+                        <h1>Sharing</h1>
+                        <p>Simply add <em>?a=</em> to the current URL to share any static or animated text. Examples:</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="textDemo/index.js"></script>
+</body>
+
+</html>
