@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>12、绘制文字</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+		
+		c.font = '100px 微软雅黑';
+		// c.textAlign = 'center';
+		c.fillText('哈哈哈',200,200);
+		c.strokeText('哈哈哈',300,300,200);
+		var text = c.measureText("哈哈哈"); // TextMetrics object
+  		console.log(text.width); // 16;
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>14、状态的保存与恢复</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+		
+		for (var i = 0; i < 10; i++) {
+			c.save();
+			c.rotate(i*6*Math.PI/180);
+			c.moveTo(250,250);
+			c.lineTo(250,270);
+			// c.lineTo(20*i,30*i);
+			// c.lineTo(30*i,30*i);
+			// c.lineTo(60*i,40*i);
+			c.stroke();
+            c.restore();
+		}
+
+	</script>
+</body>
+</html>

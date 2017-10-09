@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>11、canvas填充规则</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+
+	  	c.beginPath(); 
+  		c.arc(50, 50, 30, 0, Math.PI*2, true);
+  		c.arc(50, 50, 15, 0, Math.PI*2, true);
+  		c.arc(50, 50, 45, 0, Math.PI*2, true);
+  		// c.arc(50, 50, 60, 0, Math.PI*2, true);
+  		c.fill("evenodd");
+	</script>
+</body>
+</html>

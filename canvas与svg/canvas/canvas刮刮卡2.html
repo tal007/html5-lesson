@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas刮刮卡2</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas'),
+			c = canvas.getContext('2d'),
+			isDown = false;
+
+
+		c.save();
+		c.beginPath();
+		c.fillStyle = 'gray';
+		c.fillRect(0,0,400,400);
+		c.restore();
+
+		var arr = [];
+
+		canvas.addEventListener('mousedown',function(e){
+			this.style.cursor = "move";
+            isDown = true;
+            xPointer = e.clientX - this.offsetLeft;
+            yPointer = e.clientY - this.offsetTop;;
+            arr.push([xPointer, yPointer]);
+            circleReset(c);			
+		})
+
+		//鼠标按下后拖动
+        canvas.addEventListener('mousemove', function(e) {
+            if (isDown) {
+                xPointer = e.clientX - this.offsetLeft;;
+                yPointer = e.clientY - this.offsetTop;;
+                arr.push([xPointer, yPointer]);
+                circleReset(c);
+            }
+        });
+
+
+        //鼠标抬起取消事件
+        canvas.addEventListener('mouseup', function(e) {
+            isDown = false;
+            arr = [];
+        });
+
+		//圆形橡皮檫
+        function circleReset(c) {
+            c.save();
+            c.beginPath();
+            c.moveTo(arr[0][0], arr[0][1]);
+            c.lineCap = "round";　　 //设置线条两端为圆弧
+            c.lineJoin = "round";　　 //设置线条转折为圆弧
+            c.lineWidth = 10;
+            // https://mdn.mozillademos.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Compositing/Example$samples/Compositing_example?revision=1303307
+            
+            // 利用此属性将其设置为透明
+            c.globalCompositeOperation = "destination-out";
+            if (arr.length == 1) {
+                c.lineTo(arr[0][0] + 1, arr[0][1] + 1);
+            } else {
+                for (var i = 1; i < arr.length; i++) {
+                    c.lineTo(arr[i][0], arr[i][1]);
+                    c.moveTo(arr[i][0], arr[i][1]);
+                }
+            }
+            c.closePath();
+            c.stroke();
+            c.restore();
+        }		
+	</script>
+</body>
+</html>

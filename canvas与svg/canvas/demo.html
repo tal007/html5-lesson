@@ -24,6 +24,15 @@
 	<script>
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
+
+		/*
+		网页可见区域宽： document.body.clientWidth
+		网页可见区域高： document.body.clientHeight
+		网页可见区域宽： document.body.offsetWidth (包括边线的宽)
+		网页可见区域高： document.body.offsetHeight (包括边线的高)
+		网页正文全文宽： document.body.scrollWidth
+		网页正文全文高： document.body.scrollHeight
+		 */
 		var w = window.innerWidth || document.body.clientWidth,
 			h = window.innerHeight || document.body.clientHeight,
 			count = (w*h/3000)|0,
@@ -35,7 +44,7 @@
 			
 // 			粒子
 			particles = [],
-			huePart = 360/count;
+			huePart = count;
 		
 //		 获取浏览器视口的宽高 并 设置 canvas 的宽高
 			

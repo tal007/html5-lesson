@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>7、canvas颜色</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+
+		c.fillStyle = 'rgba(255,0,0,.5)';
+		// globalAlpha 设置透明度 不建议使用
+		// c.globalAlpha = '0.5';
+		c.fillRect(100,100,100,100);
+		c.strokeStyle = 'rgba(0,0,255,1)';
+		c.strokeRect(10,10,200,200);
+	</script>
+</body>
+</html>

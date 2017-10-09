@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>9、渐变</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+
+		var linearGridient = c.createLinearGradient(0,0,0,100);
+		linearGridient.addColorStop(0,'red');
+		linearGridient.addColorStop(0.3,'orange');
+		linearGridient.addColorStop(0.6,'yellow');
+		linearGridient.addColorStop(1,'green');
+		c.fillStyle = linearGridient;
+		c.fillRect(0,0,100,100);
+
+		// var linergradient=c.createLinearGradient(0,0,0,150);
+		// linergradient.addColorStop(0,'#00abeb'); //起始点颜色值
+		// linergradient.addColorStop(0.5,'#fff'); //中间位置颜色值
+		// linergradient.addColorStop(0.5,'#26c000'); //中间位置颜色值
+		// linergradient.addColorStop(1,'#fff'); //结束点颜色值
+		// c.fillStyle=linergradient; //填充颜色
+		// c.fillRect(35,10,130,130);
+
+		var radialgradient=c.createRadialGradient(45,45,10,52,50,30);
+		radialgradient.addColorStop(0,'#a7d30c');
+		radialgradient.addColorStop(0.9,'#019f62');
+		radialgradient.addColorStop(1,'rgba(1,159,98,0)');
+		c.fillStyle=radialgradient;
+		c.fillRect(0,0,150,150);
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>13、canvas图像</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+		
+		var img    = new Image();
+		img.src    = './images/moon.jpg';
+		img.width  = 500;
+		img.height = 500;
+		// c.drawImage(img,0,0);
+		img.onload = function(){
+			c.drawImage(img,0,0,500,500,100,100,300,300);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>8、线型</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<canvas id="canvas" width="500"	height="500"></canvas>
+
+	<script type="text/javascript">
+		var can = document.getElementById('canvas');
+		var c   = can.getContext('2d');
+
+		c.lineWidth = 20;
+		c.moveTo(20,20);
+		c.lineTo(20,100);
+		c.lineTo(100,50);
+		// c.lineTo(100,20);
+		// c.lineTo(20,20);
+		// c.lineCap = 'butt';
+		c.lineCap = 'round';
+		// c.lineCap = 'square';
+		// c.lineJoin = 'round';
+		// c.lineJoin = 'bevel';
+		c.lineJoin = 'miter';
+		// miterLimit 按最大值显示
+		c.miterLimit = 3;
+		c.stroke();
+	</script>
+</body>
+</html>

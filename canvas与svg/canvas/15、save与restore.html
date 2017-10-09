@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>15、save与restore</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <style type="text/css">
+    canvas {
+        border: 1px solid #000;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script type="text/javascript">
+    var can = document.getElementById('canvas');
+    var c = can.getContext('2d');
+
+    c.fillRect(0, 0, 150, 150); // 使用默认设置绘制一个矩形
+    c.save(); // 保存默认状态
+
+    c.fillStyle = '#09F' // 在原有配置基础上对颜色做改变
+    c.fillRect(15, 15, 120, 120); // 使用新的设置绘制一个矩形
+
+    c.save(); // 保存当前状态
+    c.fillStyle = '#FFF' // 再次改变颜色配置
+    c.globalAlpha = 0.5; // 此时使用全局的偷透明只会作用于这一个栈当中
+    c.fillRect(30, 30, 90, 90); // 使用新的配置绘制一个矩形
+
+    c.restore(); // 重新加载之前的颜色状态
+    c.fillRect(45, 45, 60, 60); // 使用上一次的配置绘制一个矩形
+
+    c.restore(); // 加载默认颜色配置
+    c.fillRect(60, 60, 30, 30); // 使用加载的配置绘制一个矩形
+    </script>
+</body>
+
+</html>
