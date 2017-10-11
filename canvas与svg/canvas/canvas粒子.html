@@ -29,11 +29,11 @@
 			oH,
 			count,
 			// 粒子的速度
-			speed = 3,
+			speed = 4,
 			// 粒子之间的间距
-			range = 50,
+			range = 80,
 
-			lineAlpha = .5;
+			lineAlpha,
 
 			dotteds = [];
 
@@ -75,9 +75,10 @@
 		Dotted.prototype.update = function(){
 			this.x += this.vx;
 			this.y += this.vy;
+			
 
-			if(this.x < 0 || this.x > oW) {this.vx *= -1;this.a = Math.random()*3 + 1;};
-			if(this.y < 0 || this.y > oH) {this.vy *= -1;this.a = Math.random()*3 + 1;};
+			if(this.x < 0 || this.x > oW) {this.vx *= -1;this.a = Math.random()*3 + 1;this.hue = Math.floor(Math.random() * 361);};
+			if(this.y < 0 || this.y > oH) {this.vy *= -1;this.a = Math.random()*3 + 1;this.hue = Math.floor(Math.random() * 361);};
 		}
 
 		function checkDist(a, b, dist){
@@ -89,7 +90,11 @@
 
 		function move(){
 			window.requestAnimationFrame(move);
-			c.clearRect(0,0,oW,oH);
+			// c.clearRect(0,0,oW,oH);
+			// 现在，我们使用的是 clearRect 函数帮我们清除前一帧动画。若用一个半透明的 fillRect 函数取代之，就可轻松制作长尾效果。
+			
+			c.fillStyle = 'rgba(0, 0, 0, .1)';
+			c.fillRect(0,0,oW,oH);
 
 			for (var i = 0; i < dotteds.length; i++) {
 				var d1 = dotteds[i];
@@ -99,6 +104,9 @@
 					var d2 = dotteds[j];
 
 					if(checkDist(d1, d2, range)){
+
+						lineAlpha = 1 - Math.sqrt(Math.pow(d1.x - d2.x,2) + Math.pow(d1.y - d2.y,2)) / range;
+						// console.log(lineAlpha);
 						c.strokeStyle = 'hsla(hue, 80%, 50%, alp)'
 							.replace('hue', (d1.hue  + d2.hue + 3)/2)
 							.replace('alp', lineAlpha);

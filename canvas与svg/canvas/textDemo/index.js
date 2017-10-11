@@ -490,6 +490,7 @@ S.ShapeBuilder = (function () {
   function fit() {
     shapeCanvas.width = Math.floor(window.innerWidth / gap) * gap;
     shapeCanvas.height = Math.floor(window.innerHeight / gap) * gap;
+    // console.log(shapeCanvas.width,shapeCanvas.height)
     shapeContext.fillStyle = 'red';
     shapeContext.textBaseline = 'middle';
     shapeContext.textAlign = 'center';
