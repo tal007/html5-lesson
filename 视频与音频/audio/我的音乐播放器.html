@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>音频</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<!-- 引用JQ -->
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- 引用css -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_401009_b3ywbnub3evu0udi.css">
+	<link rel="stylesheet" type="text/css" href="css/audio.css">
+</head>
+<body>
+	<header class="header" id="header">
+		<h1 class="title">私人音乐盒</h1>
+	</header>
+	<div class="box">
+		<!-- 左侧的展示界面 -->
+		<div class="main">
+			<!-- 图片展示区域 -->
+			<figure>
+				<img id="showImg" src="" width="200" height="200" alt="">
+				<figcaption id="title"></figcaption>
+				<figcaption id="singer"></figcaption>
+			</figure>
+			<!-- 控制组件 -->
+			<section class="controller">
+				<!-- 播放暂停，上下一曲 -->
+				<div class="btn">
+					<i id="prev" class="iconfont icon-tushujiemianshangyiqu40"></i>
+					<i id="play" class="iconfont icon-tushujiemianbofang40"></i>
+					<i id="next" class="iconfont icon-tushujiemianxiayiqu40"></i>
+				</div>
+				<!-- 音量控制 -->
+				<div class="voice">
+					<!-- 音量图标 -->
+					<i id="voice" class="iconfont icon-yinliang1"></i>
+					<!-- 音量控制条 -->
+					<div class="voiceControlbg">
+						<div class="voiceControl">
+							<span class="dot"></span>
+						</div>
+					</div>
+				</div>
+				<!-- 时间控制 -->
+				<div class="time">
+					<span id="startTime"></span>
+					<!-- 音量控制条 -->
+					<div class="timeControlbg voiceControlbg">
+						<div class="timeControl">
+							<span class="dot"></span>
+						</div>
+					</div>
+					<span id="endTime"></span>
+				</div>
+			</section>
+		</div>
+		<!-- 中间的选项 -->
+		<ul id="choose" class="choose"></ul>
+		<!-- 右侧曲目 -->
+		<ul id="items" class="items"></ul>
+	</div>
+	<!-- 音频标签 -->
+	<audio id="audio" controls></audio>
+
+	<script type="text/javascript">
+		// 定义一些变量
+		let topId,timer;
+		// 排行榜
+		topId = {
+			'3': '欧美',
+			'4': '流行榜',
+			'5': '内地',
+			'6': '港台',
+			'16': '韩国',
+			'17': '日本',
+			'26': '热歌',
+			'27': '新歌',
+			'28': '网络新歌',
+			'32': '音乐人',
+			'36': 'K歌金曲'
+		}
+		// 数据请求地址
+		// https://route.showapi.com/213-4?showapi_appid=41250&showapi_sign=c63b5d4717664eb9bf8bac2ddabe704d&topid=5
+		
+		// 获取元素
+		let play = $('#play'),
+			prev = $('#prev'),
+			next = $('#next'),
+			voice = $('#voice'),
+			showImg = $('#showImg'),
+			title = $('#title'),
+			singer = $('#singer'),
+			startTime = $('#startTime'),
+			endTime = $('#endTime'),
+			timeControl = $('.time .timeControl')[0],
+			voiceControl = $('.voice .voiceControl')[0],
+			voiceDot = $('.voice .dot')[0],
+			choose = document.getElementById('choose'),
+			items = document.getElementById('items'),
+			audio = document.getElementById('audio');
+
+
+		// ajax数据请求
+		function getData(key) {
+			$.ajax({
+				type: 'GET',
+				url: 'https://route.showapi.com/213-4?showapi_appid=41250&showapi_sign=c63b5d4717664eb9bf8bac2ddabe704d&topid=' + key,
+				// async: false,
+				success: function(data){
+					data = data.showapi_res_body.pagebean;
+					// 默认渲染第一个
+					var first = data.songlist[0];
+					var endTimeNum;
+					showImg.attr({
+						src: first.albumpic_big,
+						alt: first.songname
+					});
+					title.html('曲名：' + first.songname);
+					singer.html('歌手：' + first.singername);
+					// 225/60 = 03:45
+					if ( first.seconds%60 < 10 && Math.floor(first.seconds/60) < 10) {
+						endTimeNum = '0'+ Math.floor(first.seconds/60).toString() + ':0' + first.seconds%60
+					} else if (Math.floor(first.seconds/60) < 10) {
+						endTimeNum = '0'+ Math.floor(first.seconds/60).toString() + ':' + first.seconds%60
+					} else {
+						endTimeNum = Math.floor(first.seconds/60).toString() + ':' + first.seconds%60
+					}
+					// first.seconds/60+':'+first.seconds%60
+					startTime.html('00:00');
+					endTime.html(endTimeNum);
+					audio.src = first.url;
+					// 定时器
+					if (audio.paused == false) {
+						timer = setInterval(function(){
+							duration(first.seconds)
+						}, 1000)						
+					}
+					
+					// 遍历这个数组
+					data.songlist.forEach( function(value, index) {
+						var li = document.createElement('li');
+						// 刚好利用 index 使第一个为红色 
+						$(li).eq(index).addClass('on');
+						li.innerHTML = value.songname;
+						li.onclick = function () {
+							clearInterval(timer)
+							$(this).addClass('on').siblings().removeClass('on');
+							showImg.attr({
+								src: value.albumpic_big,
+								alt: value.songname
+							}).addClass('on');
+							title.html('曲名：' + value.songname);
+							singer.html('歌手：' + value.singername)
+
+							audio.src = value.url;
+							audio.autoplay = true;
+							play.addClass('icon-tushujiemianzanting40').removeClass('icon-tushujiemianbofang40');
+
+							// 225/60 = 03:45
+							if ( value.seconds%60 < 10 && Math.floor(value.seconds/60) < 10) {
+								endTimeNum = '0'+ Math.floor(value.seconds/60).toString() + ':0' + value.seconds%60
+							} else if (Math.floor(value.seconds/60) < 10) {
+								endTimeNum = '0'+ Math.floor(value.seconds/60).toString() + ':' + value.seconds%60
+							} else {
+								endTimeNum = Math.floor(value.seconds/60).toString() + ':' + value.seconds%60
+							}
+							// value.seconds/60+':'+first.seconds%60
+							startTime.html('00:00');
+							endTime.html(endTimeNum);
+
+							
+							setInterval(function(){
+								duration(value.seconds)
+							}, 1000)
+						}
+						items.appendChild(li);
+					});
+				}
+			})
+		}
+		
+		// 默认刚开始的时候显示内地的
+		getData(5);
+
+		// 根据topId创建标签
+		for (i in topId) {
+			var li = document.createElement('li');
+			li.innerHTML = topId[i];
+			if (i == 5) {
+				$(li).addClass('on')
+			}
+			li.setAttribute('data-key', i);
+			li.onclick = function(){
+				$(this).addClass('on').siblings().removeClass('on');
+				items.innerHTML = '';
+				getData(this.getAttribute('data-key'));
+			}
+			choose.appendChild(li);
+		}
+
+		// 播放暂停
+		play.click(function(event) {
+			if ($(this).hasClass('icon-tushujiemianzanting40') && audio.paused == false) {
+				$(this).addClass('icon-tushujiemianbofang40').removeClass('icon-tushujiemianzanting40');
+				showImg.removeClass('on');
+				audio.pause();			
+			} else {
+				$(this).addClass('icon-tushujiemianzanting40').removeClass('icon-tushujiemianbofang40');
+				showImg.addClass('on');
+				audio.play();
+			}
+		});
+
+		// 音量控制
+		// audio.volume 值为 0 的时候静音
+		// 声音开启与关闭
+		voice.click(function(event) {
+			if ($(this).hasClass('icon-yinliang1')) {
+				$(this).addClass('icon-jingyin1').removeClass('icon-yinliang1')
+				audio.volume = 0;
+			} else {
+				$(this).addClass('icon-yinliang1').removeClass('icon-jingyin1')
+				audio.volume = 1;
+			}
+		});
+		// 音量大小控制
+		voiceDot.onmousedown = function(e){
+			e = e || window.event;
+			let x,offX;
+			x = e.clientX;
+			offX = this.offsetLeft;
+			document.onmousemove = function(e){
+				e = e || window.event;
+				var xNow = offX + e.clientX - x;
+				// 为什么是 -7 与 103 呢。因为中间的这个圆
+				if (xNow < -7) {
+					xNow = -7;
+					audio.volume = 0;
+					voice.addClass('icon-jingyin1').removeClass('icon-yinliang1');
+				} else if(xNow > 103) {
+					xNow = 103;
+					audio.volume = 1;
+				} else {
+					voice.addClass('icon-yinliang1').removeClass('icon-jingyin1');
+					audio.volume = (xNow + 7)/110;
+					voiceControl.style.width = xNow + 7 + 'px';
+				}
+				// console.log(audio.volume);
+				voiceDot.style.left = xNow + 'px'
+			}
+
+			document.onmouseup = function(){
+				this.onmousemove = null;
+				this.onmouseup = null;
+			}
+		}
+
+		// 播放进度
+		function duration(totleTime) {
+			// audio.currentTime  当前的时间
+			if ( Math.floor(audio.currentTime%60) < 10 && Math.floor(audio.currentTime/60) < 10) {
+				currentTime = '0'+ Math.floor(audio.currentTime/60).toString() + ':0' + Math.floor(audio.currentTime%60)
+			} else if (Math.floor(audio.currentTime/60) < 10) {
+				currentTime = '0'+ Math.floor(audio.currentTime/60).toString() + ':' + Math.floor(audio.currentTime%60)
+			} else {
+				currentTime = Math.floor(audio.currentTime/60).toString() + ':' + Math.floor(audio.currentTime%60)
+			}			
+			startTime.html(currentTime);
+			timeControl.style.width = audio.currentTime/totleTime * 150 + 'px';
+		}
+
+	</script>
+</body>
+</html>

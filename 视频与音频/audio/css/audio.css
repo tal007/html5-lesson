@@ -1,0 +1,184 @@
+/* 设置默认的样式 */
+* {
+	margin: 0px;
+	padding: 0;
+}
+ul,ol {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+img {
+	border: none;
+}
+
+/* 设置整个网页的样式 */
+html,body {
+	width: 100%;
+	height: 100%;
+	/*overflow: hidden;*/
+}
+/* icon的样式重构 */
+.iconfont {
+	cursor: pointer;
+	font-size: 30px;
+	margin: 0 20px;
+	vertical-align: middle;
+}
+
+/* 头部的样式 */
+.header {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+}
+.header .title {
+	text-align: center;
+}
+
+/* 设置盒子的样式 */
+.box {
+	margin: 0 auto;
+	width: 800px;
+	height: 500px;
+	border: 1px solid #000;
+}
+.box .main {
+	width: 45%;
+	height: 100%;
+	background: lime;
+	text-align: center;
+	float: left;
+}
+.box .main figure {
+	padding: 20px;
+}
+.box .main figure img {
+	width: 200px;
+	height: 200px;
+	padding: 10px;
+	border-radius: 50%;
+	border: 4px solid gray;
+	box-shadow: 0 0 50px gray inset;
+}
+.box .main figure img.on {
+	animation: imgRotate 10s linear infinite;
+}
+.box .main figure figcaption {
+	margin: 20px 0;
+	font-size: 20px;
+}
+/* 按钮控制 */
+.main .controller .btn,.main .controller .voice {
+	height: 30px;
+	line-height: 30px;
+	font-size: 0;
+}
+#voice {
+	margin-right: 20px;
+}
+.main .voice {
+	margin: 10px 0;
+}
+.main .voiceControlbg {
+	display: inline-block;
+	width: 110px;
+	padding: 14px 0;
+	background: gray;
+	-webkit-background-clip: content;
+	-moz-background-clip: contbgent;
+	background-clip: content;
+	vertical-align: middle;
+	margin-right: 20px;
+}
+.main .voiceControlbg div {
+	position: relative;
+	width: 110px;
+	height: 2px;
+	background: red;
+}
+.main .voiceControlbg .dot {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	right: 0;top: -6px;
+	border-radius: 50%;
+	cursor: pointer;
+	background: white;
+}
+.main .voiceControlbg .dot:after {
+	content:'';
+	position: absolute;
+	left: 4px;top: 4px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: red;
+}
+/* 时间控制 */
+.main .time span {
+	vertical-align: middle;
+}
+#startTime {
+	margin-right: 20px;
+}
+#endTime {
+	margin-left: 20px;
+}
+.main .timeControlbg,.main .timeControlbg div {
+	margin-right: 0px;
+	width: 150px;
+}
+
+
+/* 右侧选择 */
+#choose {
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+#choose li {
+	margin-bottom: 20px;
+	text-align: center;
+	cursor: pointer;
+}
+#choose li.on {
+	color: red;
+}
+#choose li:hover {
+	color: red;
+}
+
+/* 右侧的歌曲列表 */
+#items {
+	float: right;
+	width: 40%;
+	height: 100%;
+	overflow-y: scroll;
+}
+#items li {
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+#items li.on {
+	color: red;
+}
+
+/* 自定义动画 */
+@-webkit-keyframes imgRotate {
+	from { transform: rotate(0); }
+	to { transform: rotate(360deg); }
+}
+@-o-keyframes imgRotate {
+	from { transform: rotate(0); }
+	to { transform: rotate(360deg); }
+}
+@-moz-keyframes imgRotate {
+	from { transform: rotate(0); }
+	to { transform: rotate(360deg); }
+}
+@keyframes imgRotate {
+	from { transform: rotate(0); }
+	to { transform: rotate(360deg); }
+}

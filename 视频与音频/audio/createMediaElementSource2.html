@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>createMediaElementSource2</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<style type="text/css">
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<!-- http://cctv3.qiniudn.com/hl.mp3 -->
+	<audio src="http://cctv3.qiniudn.com/hl.mp3" controls autoplay id="mp3" crossOrigin="anonymous"></audio>
+
+	<canvas id="canvas" width="500" height="400"></canvas>
+
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas'),
+			mp3 = document.getElementById('mp3'),
+			c = canvas.getContext('2d');
+
+
+		window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
+        try {
+            var audioContext = new window.AudioContext();
+        } catch (e) {
+            throw new Error("您的浏览器不支持！");
+        }
+
+		//创建节点
+        // 创建一个AnalyserNode，它可以用来显示音频时间和频率的数据。
+        // Analyser节点不仅提供了时域数据的获取接口，还提供了频域数据的获取接口。可以通过 getByteFrequencyData 方法来获取频域数据，同时域数据的获取一样，使用一个定长的缓冲区来存放获取的数据。这个长度可以在 frequencyBinCount 属性中找到。
+		var analyser = audioContext.createAnalyser(),
+		// 创建一个MediaElementAudioSourceNode接口来关联HTMLMediaElement. 这可以用来播放和处理来自<video>或<audio> 元素的音频.
+            source = audioContext.createMediaElementSource(mp3);
+            // console.log(analyser);
+
+		//连接：source → analyser → destination
+        source.connect(analyser); //截取音频信号，不写就不会播放
+        analyser.connect(audioContext.destination); //声音连接到扬声器
+
+
+    	// Uint8Array : 8 位无符号整数值的类型化数组。内容将初始化为 0。如果无法分配请求数目的字节，则将引发异常。
+    	var data = new Uint8Array(analyser.frequencyBinCount);
+    	// console.log(data);
+
+        (function render(){
+            analyser.getByteFrequencyData(data); //得到音频能量值
+            c.clearRect(0,0,500,400);
+            c.beginPath();
+            c.moveTo(0,400);
+            for (var i = 0; i < 500; i++) {
+            	c.lineTo(i,400-400*data[i]);
+            	c.lineTo(i,400);
+            }
+            c.fill();
+            window.requestAnimationFrame(render);
+        })()
+	</script>
+</body>
+</html>

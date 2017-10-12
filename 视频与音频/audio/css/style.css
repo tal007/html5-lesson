@@ -1,0 +1,285 @@
+/* iconfont的样式 */
+.iconfont {
+	font-size: 30px;
+	cursor: pointer;
+	color: white;
+}
+.icon-sousuo {
+	color: white;
+}
+
+
+/* 头部样式 */
+#header {
+	width: 100%;
+	min-width: 800px;
+	background-image: -webkit-linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+	background-image: -moz-linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+	background-image: -o-linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+	background-image: linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+
+}
+#header .container {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1000px;
+	min-width: 800px;
+	height: 50px;
+	line-height: 50px;
+}
+#header .container .title {
+	font-family:'LiDeBiao-Xing3cdece700b17d99';
+	color: #fff;
+}
+#header .container .search {
+	position: relative;
+}
+#header .container .userinput {
+	padding: 5px 10px;
+	outline: none;
+	width: 10px;
+	border-radius: 5px;
+	transition: .3s;
+	opacity: 0;
+}
+#header .container .userinput:hover {
+	box-shadow: 0 0 20px 1px deepskyblue;
+}
+#header .container .button {
+	position: absolute;
+	right: 0;
+	top: 13px;
+	cursor: pointer;
+	line-height: 1;
+	transition: 1s;
+}
+
+/* 中间区域部分 */
+#main {
+	position: absolute;
+	left: 0;right: 0;top: 0;bottom: 0;
+	margin: auto;
+	width: 100%;
+	max-width: 1000px;
+	min-width: 800px;
+	height: 550px;
+	overflow: hidden;
+	border: 1px solid #000;
+	border-radius: 10px;
+}
+#main .nav {
+	padding: 10px;
+	width: 150px;
+	border-right: 1px solid #000;
+}
+#main .nav .navList li {
+	padding: 10px;
+	background: rgba(0,0,0,.07);
+	transition: .5s;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#main .nav .navList li + li {
+	margin-top: 9px;
+}
+#main .nav .navList li:hover {
+	background: rgba(0,0,0,.3);
+}
+#main .nav .navList li.on {
+	background: rgba(0,0,0,.3);
+}
+
+#main .music {
+	width: 350px;
+	height: 100%;
+	border-right: 1px solid #000;
+}
+#main .musicInfo {
+	padding: 20px;
+	text-align: center;
+}
+#main .musicInfo #showImg {
+	border-radius: 50%;
+	width: 160px;
+	height: 160px;
+	box-shadow: 0 0 0 2px #000;
+	border: 10px solid rgba(0,0,0,.07);
+}
+#main .musicInfo figcaption {
+	font-size: 16px;
+	line-height: 1.2;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#main .musicInfo #songname {
+	margin: 5px 0;
+}
+#main .musicListContainer {
+	position: relative;
+	text-align: center;
+	height: calc(100% - 275px);
+}
+#main .musicListContainer .musicList {
+	height: calc(100% - 23px);
+	overflow: hidden;
+}
+#main .musicListContainer .musicList ul {
+	padding-top: 1px;
+	overflow: hidden;
+	margin-top: 0px;
+}
+#main .musicListContainer .musicList li {
+	width: calc(50% - 14px);
+	float: left;
+	background: rgba(0,0,0,.07);
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: .5s;
+}
+#main .musicListContainer .musicList li:hover {
+	background: rgba(0,0,0,.3);
+}
+#main .musicListContainer .musicList li.on {
+	background: rgba(0,0,0,.3);
+}
+#main .musicListContainer .scrollBar {
+	position: absolute;
+	right: 0;
+	top: 20px;
+	width: 8px;
+	height: calc(100% - 18px);
+	background: rgba(0,0,0,.3);
+	border-radius: 4px;
+}
+#main .musicListContainer .scrollBar .dot {
+	position: relative;
+	background: deepskyblue;
+	border-radius: 4px;
+}
+
+/* 右侧歌词 */
+#main .lyric {
+	width: calc(100% - 171px - 351px);
+	height: 100%;
+	box-sizing: border-box;
+}
+#main .lyric ul {
+	text-align: center;
+	padding: 0 10px 0 5px;
+	transition: all .3s;
+}
+#main .lyric ul li {
+	transition: all .3s;
+	line-height: 1.4;
+}
+/* #main .lyric .scrollBar {
+	position: absolute;
+	right: 5px;
+	top: 0px;
+	width: 8px;
+	height: 100%;
+	background: rgba(0,0,0,.3);
+	border-radius: 4px;
+}
+#main .lyric .scrollBar .dot {
+	position: relative;
+	width: 100%;
+	height: 0;
+	background: deepskyblue;
+	border-radius: 4px;
+} */
+
+
+/* 底部的样式 */
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	min-width: 800px;
+	background-image: -webkit-linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+	background-image: -moz-linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+	background-image: -o-linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+	background-image: linear-gradient(left,rgb(1,0,1),rgba(0,0,0,0.7),rgb(1,0,1));
+}
+#footer .container {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1000px;
+	min-width: 800px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+}
+#footer .container div {
+	/* 清除  inline-block 默认的间距*/
+	display: inline-block;
+	vertical-align: top;
+}
+#footer .container .conLeft {
+	width: 150px;
+}
+#footer .container .volume {
+	width: 150px;
+}
+#footer .container .progressBar {
+	width: calc(100% - 350px);
+	min-width: 300px;
+}
+#footer .container span {
+	display: inline-block;
+	width: 50px;
+	text-align: center;
+}
+#footer .container .barBg {
+	position: relative;
+	top: 21px;
+	display: inline-block;
+	width: calc(100% - 135px);
+	height: 8px;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+}
+#footer .container .barBg .bar {
+	position: relative;
+	z-index: 100;
+	height: 8px;
+	width: 4px;
+	border-radius: 4px;
+	background: red;
+}
+#footer .container .barBg .dot {
+	content: '';
+	position: absolute;
+	right: -4px;
+	top: -3px;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: white;
+	/* background: rgba(0,0,0,.5); */
+}
+#footer .container .barBg .dot::before {
+	content: '';
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: red;
+	z-index: 11;
+}
+#footer .container .volume .barBg {
+	width: calc(100% - 50px);
+}
+#footer .container .volume .bar {
+	width: 100%;
+}

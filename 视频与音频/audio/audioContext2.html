@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <button class="btn btn-primary" id="playBtn">
+            <i class="glyphicon glyphicon-pause">按鈕</i>
+        </button>
+    </div>
+    <script>
+    var url = './src/雨花石 李玉刚 石头-中国铃声原创基地.ogg';
+    if (!window.AudioContext) {
+        alert('您的浏览器不支持AudioContext');
+    } else {
+        //创建上下文
+        var ctx = new AudioContext();
+        var source = null;
+        //使用Ajax获取音频文件
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer'; //配置数据的返回类型
+        //加载完成
+        request.onload = function() {
+            var arraybuffer = request.response;
+            ctx.decodeAudioData(arraybuffer, function(buffer) {
+                //处理成功返回的数据类型为AudioBuffer 
+                //console.info(buffer);
+
+                //创建AudioBufferSourceNode对象
+                source = ctx.createBufferSource();
+                source.buffer = buffer;
+                source.connect(ctx.destination);
+                //指定位置开始播放
+                source.start(0);
+                console.info(source);
+
+            }, function(e) {
+                console.info('处理出错');
+            });
+        }
+        request.send();
+
+        //绑定播放按钮
+        $('#playBtn').click(function() {
+            var icon = $(this).find('i');;
+            icon.toggleClass('glyphicon-play').toggleClass('glyphicon-pause');
+            //停止播放
+            source.stop();
+        });
+    }
+    </script>
+</body>
+
+</html>

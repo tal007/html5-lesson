@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html onselectstart="return false">
+<head>
+	<meta charset="UTF-8">
+	<title>私人音乐盒</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<!-- 引用JQ -->
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- 引用css -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_401009_0sfl2hyn77v9ggb9.css">
+	<!-- 在线的字体 -->
+	<link href='http://cdn.webfont.youziku.com/webfonts/nomal/97689/45803/59a85b6ef629d80600cb0055.css' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+<body>
+	<!-- 头部 -->
+	<header id="header" class="header">
+		<div class="container clearfix">
+			<!-- 标题 -->
+			<h1 class="title fl">私人音乐盒</h1>
+			<i class="iconfont icon-yinle"></i>
+			<!-- 搜索框 -->
+			<div class="search fr">
+				<input id="userinput" class="userinput" type="text"  placeholder="搜索歌名或者是人名">
+				<i id="search" class="iconfont icon-sousuo button"></i>
+			</div>			
+		</div>
+	</header>
+	<!-- 中间区域 -->
+	<section id="main" class="main clearfix">
+		<!-- 左侧导航 -->
+		<nav class="nav fl">
+			<ul class="navList"></ul>
+		</nav>
+		<!-- 中间歌曲信息 -->
+		<section class="music fl">
+			<figure class="musicInfo">
+				<img id="showImg" src="http://i.gtimg.cn/music/photo/mid_album_300/B/7/0003WbEU12KMB7.jpg" width="160" height="160" alt="图片">
+				<figcaption id="songname" title="曲名">曲名</figcaption>
+				<figcaption id="singer" title="singer">singer</figcaption>
+			</figure>
+			<section class="musicListContainer">
+				<h3 class="title">内地排行榜</h3>
+				<div class="musicList">
+					<ul></ul>
+				</div>
+				<!-- 右侧滚动条 -->
+				<div class="scrollBar">
+					<div class="dot"></div>
+				</div>
+			</section>
+		</section>
+		<!-- 右侧歌词 -->
+		<section id="lyric" class="lyric fl">
+			<ul></ul>
+			<!-- 右侧滚动条
+			<div class="scrollBar">
+				<div class="dot"></div>
+			</div> -->
+		</section>
+	</section>
+	<!-- 我就是一个音频标签 -->
+	<audio src="" id="audio"></audio>
+	<!-- 底部 -->
+	<footer id="footer" class="footer">
+		<div class="container">
+			<!-- 左侧的控制按钮 上、下、播放、暂停-->
+			<div class="conLeft">
+				<i id="prev" class="iconfont icon-tushujiemianshangyiqu40"></i>
+				<i id="play" class="iconfont icon-tushujiemianbofang40"></i>
+				<i id="next" class="iconfont icon-tushujiemianxiayiqu40"></i>
+			</div>
+			<!-- 中部的进度条 -->
+			<div class="progressBar">
+				<span id="startTime">00:00</span>
+				<!-- 实际进度 -->
+				<div class="barBg">
+					<div class="bar">
+						<div class="dot"></div>
+					</div>
+				</div>
+				<span id="endTime">05:00</span>
+			</div>
+			<!-- 右侧的音量 -->
+			<div class="volume">
+				<i id="volume" class="iconfont icon-yinliang1"></i>
+				<!-- 音乐的音量大小 -->
+				<div class="barBg">
+					<div class="bar">
+						<div class="dot"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<canvas id="canvas"></canvas>
+
+	<!-- 使用思源黑体 -->
+	<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
+	<script type="text/javascript">
+	   	$youziku.load("body", "0a01481b9bff4d3bad79dd7893cf208a", "Source-Han-Normal");
+	   	/*$youziku.load("#id1,.class1,h1", "0a01481b9bff4d3bad79dd7893cf208a", "Source-Han-Normal");*/
+	  	/*．．．*/
+	   	$youziku.draw();
+	</script>
+	<!-- 个人的js -->
+	<script src='js/index.js'></script>
+</body>
+</html>
