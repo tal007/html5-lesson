@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset='UTF-8'>
+   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+   <title>垃圾箱</title>
+   <meta name='keywords' content=''/>
+   <meta name='description' content=''/>
+   <style>
+       * {
+           margin: 0;margin: 0;
+           -webkit-user-select: none;
+           -moz-user-select: none;
+           user-select: none;
+       }
+       #box {
+           width: 200px;
+           height: 400px;
+           border: 1px solid red;
+           float: left;
+           font-size: 40px;
+           text-align: center;
+           line-height: 400px;
+       }
+       #item {
+           float: right;
+       }
+       li {
+           width: 200px;
+           height: 50px;
+           line-height: 50px;
+           text-align: center;
+           list-style: none;
+           border: 1px solid rgb(87, 194, 25);
+           margin-bottom: 1px;
+           cursor: move;
+           transition: all .1s;
+       }
+   </style>
+</head>
+<body>
+   <div id="box" draggable="true"></div>
+   <ul id="item">
+       <li>01</li>
+       <li>02</li>
+       <li>03</li>
+       <li>04</li>
+       <li>05</li>
+   </ul>
+   
+<script>
+    var items = document.querySelectorAll('#item li');
+    var dragEle = null;
+    var n = 0;
+    for (var i = items.length - 1; i >= 0; i--) {
+        var ele = items[i];
+        // 给每一个 li 添加自定义属性
+        ele.setAttribute('draggable','true');
+        ele.setAttribute('dateId',i);
+        // 给每一个 li 通过事件监听的方式添加事件
+        ele.addEventListener('dragstart',function(e){
+            e = e || event;
+            // console.log(e);
+            // console.log(this);
+            
+            // 设置此属性保证在火狐浏览期下面也可以进行拖动
+            e.dataTransfer.setData('dateId',e.target.getAttribute('dateId'))
+            e.target.style.cssText = 'font-size: 20px;background-color: lime;'
+            dragEle = e.target;
+        })
+        ele.ondrag = function(e){
+            e = e || event;
+        }
+    }
+    /* 
+    拖动的元素移动到目标元素的上面的时候
+    注意的是：是鼠标移动上去而不是拖动的元素移上去
+     */
+    box.ondragenter = function(e){
+        this.style.backgroundColor = "blue";
+    }
+    // 拖动时候鼠标在目标元素上面
+    box.ondragover = function(e){
+        this.style.backgroundColor = "blue";
+        this.style.color = "white";
+        n++;
+        this.innerHTML = n;
+        e.preventDefault();
+    }
+    // 离开
+    box.ondragleave = function(e){
+        n = 0;
+        this.style.backgroundColor = "";
+        this.style.color = "";
+        this.innerHTML = n;
+    }
+    // 鼠标释放的时候执行的操作
+    box.ondrop = function(e){
+        // 释放鼠标的时候删除这个拖动的元素
+        dragEle.parentNode.removeChild(dragEle);
+        // 需要阻止默认的事件
+        e.preventDefault(); 
+    }
+    
+</script>
+</body>
+</html>
