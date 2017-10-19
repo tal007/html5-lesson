@@ -201,23 +201,6 @@ function getData(key){
 			// 可以拖动时间条，但是音乐播放了才可以拖动
 			if (!$audio[0].paused) {dragDuration(totleTime)}
 			
-
-			// 点击上一曲下一曲
-			$prev.click(function(){
-				var index = $audio[0].getAttribute('index');
-				index--;
-				index = index < 0? length-1 : index
-				changeMusic(songlist[index],index)
-				$musicList.find('li').eq(index).addClass('on').siblings().removeClass('on');
-			})
-			// 点击下一曲
-			$next.click(function(){
-				var index = $audio[0].getAttribute('index');
-				index++;
-				index = index > length-1? 0 : index
-				changeMusic(songlist[index],index)
-				$musicList.find('li').eq(index).addClass('on').siblings().removeClass('on');
-			})
 		} else {
 			var li = document.createElement('li');
 			li.innerHTML = '数据请求失败，请稍后再试！！！';
@@ -530,6 +513,24 @@ $volumeBar.find('.dot').mousedown(function(e){
 	}	
 })
 
+// 点击上一曲下一曲
+$prev.click(function(){
+	var index = $audio[0].getAttribute('index');
+	index--;
+	index = index < 0? length-1 : index
+	changeMusic(songlist[index],index)
+	$musicList.find('li').eq(index).addClass('on').siblings().removeClass('on');
+})
+// 点击下一曲
+$next.click(function(){
+	var index = $audio[0].getAttribute('index');
+	index++;
+	index = index > length-1? 0 : index
+	console.log(index)
+	changeMusic(songlist[index],index)
+	$musicList.find('li').eq(index).addClass('on').siblings().removeClass('on');
+})
+
 // 上一曲、下一曲、li点击切换函数
 function changeMusic(value,index){
 	clearInterval(timer1);
@@ -640,130 +641,6 @@ $search.click(function(e) {
 		alert('请输入歌曲名字或者歌手名字')
 	}
 });
-
-
-		var canvas = document.getElementById('canvas'),
-			mp3 = document.getElementById('audio'),
-			c = canvas.getContext('2d'),
-            oW,
-            oH,
-            count,
-            // 粒子的速度
-            speed = 4,
-            // 粒子之间的间距
-            range = 80,
-
-            lineAlpha,
-
-            dotteds = [];
-
-
-        // 获取窗口大小
-        function getAndSet(){
-            // 获取屏幕的宽高
-            oW = window.innerWidth || document.body.clientWidth,
-            oH = window.innerHeight || document.body.clientHeight;
-            // 设置canvas画布的宽高
-            // console.log(oW,oH);
-            canvas.width = oW;
-            canvas.height = oH;
-
-            // 例子的个数
-            count = (oW*oH/5000)|0;
-            // console.log(count);
-        }
-        getAndSet();
-        window.onresize = function(){
-            getAndSet();
-        }
-
-
-		window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
-        try {
-            var audioContext = new window.AudioContext();
-        } catch (e) {
-            throw new Error("您的浏览器不支持！");
-        }
-
-		//创建节点
-        // 创建一个AnalyserNode，它可以用来显示音频时间和频率的数据。
-        // Analyser节点不仅提供了时域数据的获取接口，还提供了频域数据的获取接口。可以通过 getByteFrequencyData 方法来获取频域数据，同时域数据的获取一样，使用一个定长的缓冲区来存放获取的数据。这个长度可以在 frequencyBinCount 属性中找到。
-		var analyser = audioContext.createAnalyser(),
-		// 创建一个MediaElementAudioSourceNode接口来关联HTMLMediaElement. 这可以用来播放和处理来自<video>或<audio> 元素的音频.
-            source = audioContext.createMediaElementSource(mp3);
-            // console.log(analyser);
-
-		//连接：source → analyser → destination
-        source.connect(analyser); //截取音频信号，不写就不会播放
-        analyser.connect(audioContext.destination); //声音连接到扬声器
-
-
-        
-        // 粒子
-        for (var i = 0; i < count; i++) {
-            dotteds.push(new Dotted( i * Math.floor(Math.random() * 361) ))
-        }
-
-        function Dotted(hue){
-            // 单个例子的起始坐标
-            this.x = Math.random()*oW;
-            this.y = Math.random()*oH;
-            this.a = Math.random()*3 + 1;
-
-            // 单个例子的速度
-            this.vx = (Math.random()-.5)*speed;
-            this.vy = (Math.random()-.5)*speed;
-
-            this.hue = hue;
-        }
-        Dotted.prototype.update = function(){
-            this.x += this.vx;
-            this.y += this.vy;
-            
-
-            if(this.x < 0 || this.x > oW) {this.vx *= -1;this.hue = Math.floor(Math.random() * 361);};
-            if(this.y < 0 || this.y > oH) {this.vy *= -1;this.hue = Math.floor(Math.random() * 361);};
-        }
-        function checkDist(a, b, dist){
-            var x = a.x - b.x,
-                y = a.y - b.y;
-
-            return x*x + y*y <= dist*dist;
-        }   
-
-        // Uint8Array : 8 位无符号整数值的类型化数组。内容将初始化为 0。如果无法分配请求数目的字节，则将引发异常。
-        // 下面两个必须一起，否者会报错，估计是因为时间的原因
-        var data = new Uint8Array(analyser.frequencyBinCount);
-        (function render(){
-            // console.log(data);
-            analyser.getByteFrequencyData(data); //得到音频能量值
-
-            c.clearRect(0,0,oW,oH);
-            
-            // c.fillStyle = 'rgba(0, 0, 0, .1)';
-            // c.fillRect(0,0,oW,oH);
-
-            for (var i = 0; i < dotteds.length; i++) {
-                var d1 = dotteds[i];
-                var randomX = data[i] / 5;
-                var randomY = data[i] / 5;
-                if (d1.vx < 0) {
-                    randomX = -randomX;
-                }
-                if (d1.vy < 0) {
-                    randomY = -randomY;
-                }
-                d1.update();
-
-                c.beginPath();
-                c.arc((d1.x + randomX),(d1.y + randomY),data[i]/15,0,Math.PI*2,true);
-                c.fillText(data[i],(d1.x + randomX),(d1.y + randomY));
-                c.fillStyle = 'hsl('+d1.hue+', 80%, 50%)';
-                c.fill();
-            }
-            window.requestAnimationFrame(render);
-        })()
-
 
 // 动画
 window.requestAnimFrame = (function(){
