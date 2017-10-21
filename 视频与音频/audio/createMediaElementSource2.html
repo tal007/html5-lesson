@@ -48,15 +48,22 @@
     	// console.log(data);
 
         (function render(){
-            analyser.getByteFrequencyData(data); //得到音频能量值
-            c.clearRect(0,0,500,400);
+			analyser.getByteFrequencyData(data); //得到音频能量值
+			c.clearRect(0,0,500,400);
+			// c.fillStyle = "rgba(255,255,255,0.3)";
+            // c.fillRect(0,0,500,400);
             c.beginPath();
-            c.moveTo(0,400);
-            for (var i = 0; i < 500; i++) {
-            	c.lineTo(i,400-400*data[i]);
-            	c.lineTo(i,400);
+			c.lineWidth = 4;
+            for (var i = 0; i < 100; i++) {
+				c.strokeStyle = 'hsl('+data[i]%360+',50%,50%)';
+				// console.log(c.strokeStyle);
+				// c.moveTo(0,400);
+            	c.moveTo(i*5+3,400);
+				// console.log(data[i]);
+				c.lineTo(i*5+3,400 - data[i]);
+				c.closePath();
             }
-            c.fill();
+			c.stroke();
             window.requestAnimationFrame(render);
         })()
 	</script>
