@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>video1</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+</head>
+
+<body>
+    <video id="video" src="./src/59e89f7e1558e_wpc.mp4" controls></video>
+    <p>
+        <input type="button" onclick="kuaijib()" value="快进">
+    </p>
+    <p>
+        <input type="button" onclick="kuaitui()" value="快退">
+    </p>
+    <p>
+        <input type="button" onclick="isPlay()" value="播放/暂停">
+    </p>
+    <p>
+        <input type="button" onclick="full()" value="全屏">
+    </p>
+    <p id="show">常速播放</p>
+
+    <script type='text/javascript'>
+        var video = document.getElementById("video");
+        var show = document.getElementById("show");
+        console.log(video.defaultPlaybackRate);
+        // video.playbackRate = 5;
+        function kuaijib() {
+            video.playbackRate *= 2;
+            video.playbackRate = video.playbackRate > 32 ? 32 : video.playbackRate;
+            if (video.playbackRate == 1) {
+                show.innerHTML = '常速播放';
+                return;
+            }
+            show.innerHTML = 'X' + video.playbackRate;
+        }
+
+        function kuaitui() {
+            video.playbackRate /= 2;
+            video.playbackRate = video.playbackRate < 1 / 32 ? 1 / 32 : video.playbackRate;
+            if (video.playbackRate == 1) {
+                show.innerHTML = '常速播放';
+                return;
+            }
+            show.innerHTML = 'X' + video.playbackRate;
+        }
+
+        function isPlay(){
+            !video.paused?video.pause():video.play();
+        }
+
+        function full() {
+            var docElm = document.documentElement;
+            //W3C
+            if (docElm.requestFullscreen) {
+                video.requestFullscreen();
+            }
+            //FireFox
+            else if (docElm.mozRequestFullScreen) {
+                video.mozRequestFullScreen();
+            }
+            //Chrome等
+            else if (docElm.webkitRequestFullScreen) {
+                video.webkitRequestFullScreen();
+            }
+            //IE11
+            else if (docElm.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        };
+
+        function exitFull(){
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
+            else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
+            else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+    </script>
+</body>
+
+</html>
