@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>拖动的样式</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: #000;
+        }
+        #box1 {
+            width: 200px;
+            height: 200px;
+            /* background: #000; */
+            border: 1px solid red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" draggable="true"></div>
+    <div id="box1" draggable="true"></div>
+    
+    <script type='text/javascript'>
+        var box = document.getElementById("box");
+        var box1 = document.getElementById("box1");
+        var img = new Image();
+
+        window,onload = function(){
+            img.src = "./leaf.svg";
+        }
+
+        box.ondragstart = function(e){
+            e = e || event;
+            e.dataTransfer.setData("drag","","drag");
+            // 下面必须设置  测试 move 与 copy 两个值
+            e.dataTransfer.effectAllowed  = "linkMove";
+            img.style.display = "block"
+
+            // 此处设置拖动时候的图片
+            e.dataTransfer.setDragImage(img,100,100)
+
+
+            console.log(e);
+        }
+        box.ondrag = function(e){
+            e = e || event;
+            e.dataTransfer.effectAllowed  = "move";
+            // e.preventDefault();
+        }
+        box1.ondragover = function(e){
+            // 上面必须设置  值需要与上面一直或者是 all 才可以生效
+            e.dataTransfer.dropEffect = "all";
+            console.log('over');
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
