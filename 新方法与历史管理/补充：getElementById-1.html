@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>补充：getElementById-1</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+</head>
+
+<body>
+    <div id="myDiv">
+        <p class="myP">hello world</p>
+        <p class="myP">hello dolby</p>
+        <p class="myP">hello dot</p>
+        <p class="myP">hello bean</p>
+    </div>
+    <script>
+        var div = document.getElementById("myDiv");
+        console.log(div); //(1)
+        var body = document.querySelector('body');
+        body.removeChild(div);
+        console.log(body); //(2)
+    </script>
+</body>
+</html>

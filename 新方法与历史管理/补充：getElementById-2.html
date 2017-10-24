@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>补充：getElementById-2</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+    <script>
+        function changeColor(newColor) {
+            var elem = document.getElementById("para1");
+            elem.style.color = newColor;
+        }
+    </script>
+</head>
+
+<body>
+    <p id="para1">Some text here</p>
+    <button onclick="changeColor('blue');">blue</button>
+    <button onclick="changeColor('red');">red</button>
+
+    <script>
+        // getElementById()方法不会搜索不在文档中的元素。当创建一个元素且分配ID后，
+        // 必须要使用insertBefore()或其他类似的方法把元素插入到文档中之后才能使用 getElementById() 获取到:
+        // 他是一个静态获取的方法
+        var element = document.createElement("div");
+        var elem = document.getElementById("para1");
+        element.id = 'test';
+        // elem.insertBefore(element,elem.childNodes[0]);
+        var el = document.getElementById('test'); // el will be null!
+        console.log(el);
+    </script>
+</body>
+
+</html>

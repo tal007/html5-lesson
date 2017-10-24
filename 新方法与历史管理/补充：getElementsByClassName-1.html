@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>补充：getElementsByClassName-1</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+</head>
+
+<body>
+    <div class="myDiv">
+        <p class="myP">1</p>
+        <p class="myP">2</p>
+        <p class="myP">3</p>
+        <p class="myP">4</p>
+    </div>
+    <script>
+        var div = document.getElementsByClassName("myDiv");
+        console.log(div); //(3)
+        var p = document.getElementsByClassName("myP");
+        for (var i = 0; i < p.length; i++) {
+            console.log( p.length);
+            div[0].removeChild(p[i]);
+        }
+        console.log(p); //(4)
+        // 以上用删除节点的方法验证了getElementsByClassName方法返回的是一个HTMLCollection动态集合。
+        /* 
+        getELemementsByTagName 与 getElementsByName 和 CLassName 一样属于这一类
+         */
+        /* 
+        你可以简单地理解为，getElementBy系列返回的都是动态的HTMLCollection集合，
+        动态集合中的DOM结构变化能实时地反映到所保存的对象中，
+        而querySelector系列返回的都是静态的NodeList对象，
+        是一个快照，对DOM的任何操作都不会对其产生影响。
+         */
+    </script>
+</body>
+
+</html>
