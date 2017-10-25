@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>地理位置1</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+</head>
+
+<body>
+    <input type="button" value="请求地理">
+    <div id='box'></div>
+    <script type="text/javascript">
+        var box = document.querySelector("#box");
+        var button = document.querySelector('input');
+        button.onclick = function () {
+            box.innerHTML = "";
+            //console.log(navigator);
+            //console.log(navigator.geolocation.getCurrentPosition);
+            navigator.geolocation.getCurrentPosition(function (position) {
+                box.innerHTML += '经度:' + position.coords.longitude + '<br>';
+                box.innerHTML += '纬度:' + position.coords.latitude + '<br>';
+                box.innerHTML += '准确度:' + position.coords.accuracy + '<br>';
+                box.innerHTML += '海拔:' + position.coords.altitude + '<br>';
+                box.innerHTML += '海拔准确度:' + position.coords.altitudeAcuracy + '<br>';
+                box.innerHTML += '行进方向:' + position.coords.heading + '<br>';
+                box.innerHTML += '地面速度:' + position.coords.speed + '<br>';
+                box.innerHTML += '时间戳：' + new Date(position.timestamp) + '<br>';
+                console.log(position);
+            }, function (err) {
+                alert(err.code)
+                console.log(err.code)
+                console.log(err.message);
+                // switch (err.PERMISSION_DENIED)
+            }, {
+                enableHighAcuracy : true,
+                // timeout : 1000,
+                // maximumAge : 5000
+            });
+        };
+    </script>
+</body>
+
+</html>
