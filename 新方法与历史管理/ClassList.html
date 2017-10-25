@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>4、ClassList</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+    <style>
+        .a {
+            color: red;
+        }
+        .b {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" class="box">文字</div>
+    <input type="button" value="按钮" id="button">
+    
+    <script type='text/javascript'>
+        var box = document.getElementById("box");
+        var button = document.getElementById("button");
+
+        button.onclick = function(){
+            // console.log(box.classList);
+            box.classList.add('a');
+            // ClassList 伪数组
+            // console.log(box.classList);
+            box.classList.remove('box');
+            // console.log(box.classList);
+            box.classList.toggle("b");
+            console.log(box.classList);
+            console.log(box.classList.contains('b'));
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>3、对比动静态方法</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+    <style>
+        .box1 {
+            border: 1px solid red;
+        }
+        
+        .box2 {
+            border: 1px solid rgb(23, 189, 64);
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <!-- <p class="p1">1</p> -->
+        <p class="p1">2</p>
+        <!-- <p class="p1">3</p> -->
+        <p class="p1">4</p>
+    </div>
+
+    <div class="box2">
+        <p class="p2">1</p>
+        <p class="p2">2</p>
+        <p class="p2">3</p>
+        <p class="p2">4</p>
+    </div>
+
+    <script type='text/javascript'>
+        // ClassName
+        var box1 = document.getElementsByClassName("box1");
+        var p1 = document.getElementsByClassName("p1");
+        console.log(p1);
+        for (var i = 0; i < p1.length; i++) {
+            var ele = p1[i];
+            box1[0].removeChild(p1[i]);
+        }
+        // for (var i = p1.length - 1; i >= 0; i--) {
+        //     var ele = p1[i];
+        //     box1[0].removeChild(p1[i]);
+        // }
+
+        // querySelectorAll
+        var box2 = document.querySelectorAll(".box2");
+        var p2 = document.querySelectorAll(".p2");
+        console.log(p2);
+        for (var i = 0; i < p2.length; i++) {
+            var ele = p2[i];
+            box2[0].removeChild(p2[i]);
+        }
+    </script>
+</body>
+</html>

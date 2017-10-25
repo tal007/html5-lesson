@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>8、前进与后退</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+    <style>
+        .btn {
+            width: 100%;
+            height: 60px;
+            background: #757474;
+        }
+        .foward,.back {
+            padding: 5px 10px;
+            background: red;
+        }
+        .foward {
+            float: left;
+        }
+        .back {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="btn">
+        <div class="back">back</div>
+        <div class="foward">foward</div>
+    </div>
+    <input type="button" value="按钮">
+    <p></p>
+    
+    <script type='text/javascript'>
+        var button = document.querySelector('input');
+        var p = document.querySelector('p');
+        var foward = document.querySelector('.foward');
+        var back = document.querySelector('.back');
+
+        button.onclick = function(){
+            var r = random();
+            // console.log(history);
+            // pushState 创建一个 state 拥有历史存储功能
+            history.pushState(r,"",r);
+            p.innerHTML = r;
+        }
+        // onpopstate 监听 pushState 的变换
+        window.onpopstate = function(e){
+            e = e || window.event;
+            console.log(e);
+            p.innerHTML = e.state;
+        }
+
+        function random(){
+            var a = Math.random() * 99 + 1;
+            a = a < 10? "0" + a : a;
+            return a;
+        }
+        foward.onclick = function(){
+            h(1);
+        }
+        
+        back.onclick = function(){
+            h(-1);
+        }
+        function h(k){
+            // k < 0? history.back():history.forward();
+            history.go(k)
+        }
+    </script>
+</body>
+</html>
