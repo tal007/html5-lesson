@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TZ-追梦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        #drag{width:402px;height:352px;margin:50px auto 0px;}
+        .div{width:400px;height:50px;}
+        #div1{background:#F6C;}
+        #div2{background:#09F;}
+        #div3{background:#C39;}
+        #div4{background:#9F9;}
+        #div5{background:#96F;}
+        #div6{background:#CCC;}
+        #div7{background:#BD86AB;}
+        span{width:30px;height:50px;line-height:50px;text-align:center;font-family:"Micrsoft YaHei";font-size:14px;color:#fff;display:inline-block;float:left;margin-left:10px;}
+        a{display:inline-block;width:200px;height:50px;line-height:50px;text-align:center;text-decoration:none;font-family:"Micrsoft YaHei";font-size:14px;color:#60C;font-weight:600;float:left;margin:0px 10px;}
+        i{font-style:normal;display:inline-block;width:50px;height:50px;line-height:50px;text-align:center;font-family:"Micrsoft YaHei";font-size:14px;color:#fff;float:left;}
+        img{
+            position: absolute;
+            left:-9999px;
+        }
+    </style>
+</head>
+<body>
+    <div id="drag">
+        <div id="div1" class="div" draggable="true">
+            <span>01</span>
+            <a href="javascript:;">我也许在等候</a>
+            <i>庄心妍</i>
+        </div>
+        <div id="div2" class="div" draggable="true">
+            <span>02</span>
+            <a href="javascript:;">南泥湾</a>
+            <i>李谷一</i>
+        </div>
+        <div id="div3" class="div" draggable="true">
+            <span>03</span>
+            <a href="javascript:;">大梦想家</a>
+            <i>TFboys</i>
+        </div>
+        <div id="div4" class="div" draggable="true">
+            <span>04</span>
+            <a href="javascript:;">清明雨上</a>
+            <i>许嵩</i>
+        </div>
+        <div id="div5" class="div" draggable="true">
+            <span>05</span>
+            <a href="javascript:;">咱们结婚吧</a>
+            <i>齐晨</i>
+        </div>
+        <div id="div6" class="div" draggable="true">
+            <span>06</span>
+            <a href="javascript:;">大河向东流</a>
+            <i>刘欢</i>
+        </div>
+        <div id="div7" class="div" draggable="true">
+            <span>07</span>
+            <a href="javascript:;">彼岸花</a>
+            <i>何洁</i>
+        </div>
+    </div>
+    <img src="bg.jpg" width="20" height="20" alt="" id="img">
+    <script>
+        var oDrag = document.querySelector('#drag'),
+            oImg = document.querySelector('#img'),
+            aDiv = document.querySelectorAll('.div');
+
+        for ( var i=0;i<aDiv.length;i++ ){
+            var Y = 0;
+            aDiv[i].index = i;
+            aDiv[i].ondragstart = function (e) {
+                var e = e || event;
+                Y = e.clientY;
+                This = this.index;
+                e.dataTransfer.effectAllowed = 'link';
+                e.dataTransfer.setDragImage(oImg,-20,-20);
+            };
+            aDiv[i].ondragenter = function (e) {
+                var e = e || event;
+                for( var i=0;i<aDiv.length;i++ ){
+                    aDiv[i].style.border = 'none';
+                }
+                this.style.border = '2px solid';
+
+            };
+            aDiv[i].ondragover = function (e) {
+                e.preventDefault();
+            };
+            aDiv[i].ondrop = function (e) {
+                var y = e.clientY;
+                console.log( Y,y );
+                if( Y - y < 0 ){  // 从上往下拖
+                    insertAfter(aDiv[This],this);
+                }else{  //从下往上拖
+                    //console.log(this);
+                    oDrag.insertBefore(aDiv[This],this);
+                }
+            };
+        }
+        
+        function insertAfter( newItem,targetItem ) {
+            var parentItem = targetItem.parentNode;
+            //console.log(parentItem.children[aDiv.length-1]);
+            if( parentItem.children[aDiv.length-1] == targetItem ){
+                parentItem.appendChild(newItem)
+            }else{
+                parentItem.insertBefore(newItem,targetItem.nextSibling);
+            }
+        }
+    </script>
+</body>
+</html>
