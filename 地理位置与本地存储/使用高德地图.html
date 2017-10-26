@@ -15,8 +15,8 @@
         }
 
         #container {
-            width: 100%;
-            height: 100%;
+            width: 500px;
+            height: 400px;
         }
     </style>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=dc9bccc0ec5b77e40d3fb85a6be9bfae"></script>
@@ -25,8 +25,31 @@
 <body>
     <!-- dc9bccc0ec5b77e40d3fb85a6be9bfae -->
     <div id="container"></div>
+    <div id="tip"></div>
     <script type='text/javascript'>
-        var map = new AMap.Map('container');
+        //自定义定位标记
+
+
+        var map = new AMap.Map('container', {
+            // viewMode:'3D',
+        resizeEnable: true
+        });
+
+            //自定义定位标记
+    var toolBar;
+    var customMarker = new AMap.Marker({
+        offset: new AMap.Pixel(-14, -34),//相对于基点的位置
+        icon: new AMap.Icon({  //复杂图标
+            size: new AMap.Size(27, 36),//图标大小
+            image: "https://webapi.amap.com/images/custom_a_j.png", //大图地址
+            imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
+        })
+    });
+    //地图中添加地图操作ToolBar插件
+    map.plugin(["AMap.ToolBar"], function() {
+        toolBar = new AMap.ToolBar({locationMarker: customMarker}); //设置地位标记为自定义标记
+        map.addControl(toolBar);
+    });
         // 精确定位
         map.plugin('AMap.Geolocation', function () {
             geolocation = new AMap.Geolocation({
@@ -46,8 +69,38 @@
             geolocation.getCurrentPosition();
             AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
             AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
+
         });
 
+        AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.OverView'],
+            function () {
+                map.addControl(new AMap.ToolBar());
+
+                map.addControl(new AMap.Scale());
+
+                map.addControl(new AMap.OverView({
+                    isOpen: true
+                }));
+
+                map.addControl(new AMap.Geolocation());
+                map.addControl(new AMap.MapType());
+            });
+
+        function onComplete(data) {
+            console.log(data);
+            var str = ['定位成功'];
+            str.push('经度：' + data.position.getLng());
+            str.push('纬度：' + data.position.getLat());
+            if (data.accuracy) {
+                str.push('精度：' + data.accuracy + ' 米');
+            } //如为IP精确定位结果则没有精度信息
+            str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+            document.getElementById('tip').innerHTML = str.join('<br>');
+        }
+        //解析定位错误信息
+        function onError(data) {
+            document.getElementById('tip').innerHTML = '定位失败';
+        }
 
 
         // 根据你的地理位设置你的中心        
