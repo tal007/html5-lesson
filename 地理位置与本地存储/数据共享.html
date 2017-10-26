@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TZ-追梦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" value="北京烤鸭">北京烤鸭 <br>
+    <input type="checkbox" value="芒果">芒果<br>
+    <input type="checkbox" value="坚果">坚果<br>
+    <input type="checkbox" value="开心果">开心果<br>
+    <input type="checkbox" value="运动">运动<br>
+
+    <script>
+        var aInput = document.querySelectorAll('input');
+        for( var i=0;i<aInput.length;i++ ){
+            aInput[i].onclick = function () {
+                if( this.checked ){  //选中
+                    window.localStorage.setItem('sel',this.value);
+                }else{ // 没选中
+                    window.localStorage.setItem('onsel',this.value);
+                }
+            };
+        }
+        window.addEventListener('storage',function (e) {
+            if( e.key == 'sel' ){
+                for( var i=0;i<aInput.length;i++ ){
+                    if( e.newValue == aInput[i].value ){
+                        aInput[i].checked = true;
+                    }
+                }
+            }else if( e.key == 'onsel' ){
+                for( var i=0;i<aInput.length;i++ ){
+                    if( e.newValue == aInput[i].value ){
+                        aInput[i].checked = false;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
