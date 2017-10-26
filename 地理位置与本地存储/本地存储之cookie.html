@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>本地存储之cookie</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+</head>
+<body>
+    <div class="box"></div>
+    <input type="button" value="">
+    
+    <script type='text/javascript'>
+        var oBox = document.querySelector(".box");
+        var input = document.querySelector("input");
+        var len = document.cookie.length;
+        // 设置cookie
+        function setCookie(name){
+            var r = Math.floor(Math.random() * 99 + 1);
+            document.cookie = r + "=" + name;
+        }
+        setCookie("木马")
+        console.log(document.cookie);
+        for (var i = 0; i < len; i++) {
+            var ele = document.cookie.split(";")[i];
+            oBox.innerHTML += ele + '</br>';
+        }
+        
+        // 读取cookie
+        function getCookie(name){
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if (arr=document.cookie.match(reg)) {
+                alert("你好" + arr[2])
+                return unescape(arr[2]);
+            }
+            else {
+                return null;
+            }
+        }
+        input.onclick = function(){
+            getCookie("木马")
+        }
+
+    </script>
+</body>
+</html>

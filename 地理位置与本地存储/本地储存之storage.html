@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>本地储存之storage</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+</head>
+<body>
+    <div class="box"></div>
+    <input class="add" type="button" value="添加1">
+    <input class="add" type="button" value="添加2">
+    <input class="remove" type="button" value="删除1">
+    <input class="remove" type="button" value="删除2">
+    <input class="clear" type="button" value="清除全部">
+    
+    <script type='text/javascript'>
+        var oBox = document.querySelector(".box");
+        var clear = document.querySelector(".clear");
+        var add = document.querySelectorAll(".add");
+        var remove = document.querySelectorAll(".remove");
+        var len = localStorage.length;
+        console.clear();
+        console.log(localStorage);
+        console.log(sessionStorage);
+        // 设置
+        for (var i = 0; i < add.length; i++) {
+            var ele = add[i];
+            ele.i = i;
+            ele.onclick = function (){
+                localStorage.setItem(this.i,"踏浪" + this.i);
+            }
+        }
+        // sessionStorage.setItem("1","踏浪");
+
+        // 获取
+        for (var i = 0; i < len; i++) {
+            oBox.innerHTML += localStorage.getItem(i) + '<br>'
+        }
+
+        // 清楚一个
+        for (var i = 0; i < remove.length; i++) {
+            var ele = remove[i];
+            ele.i = i;
+            ele.onclick = function (){
+                localStorage.removeItem(this.i)
+                console.log('清楚');
+            }
+        }
+        // 清楚全部
+        clear.onclick = function(){
+            localStorage.clear();
+        }
+        console.log(len);
+
+    </script>
+</body>
+</html>
