@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>2、touchEvent</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<style type="text/css">
+		* {
+			margin: 0;padding: 0;
+		}
+		.box {
+			width: 200px;
+			height: 200px;
+			background: #000;
+			color: #fff;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+
+	<script type="text/javascript">
+		var oBoxs = document.querySelectorAll('.box');
+
+		var startX,startY,nowX,nowY;
+
+		oBoxs[0].addEventListener('touchstart', function(e){
+			console.log(e.touches[0]);
+			this.innerHTML = 'X---' + e.touches[0].clientX + '<br>';
+			this.innerHTML += 'Y---' + e.touches[0].clientY;
+			startX = e.touches[0].clientX - this.offsetLeft;
+			startY = e.touches[0].clientY - this.offsetTop;
+		}, false)
+
+		oBoxs[0].addEventListener('touchmove', function(e){
+			console.log(this.offsetTop,this.offsetLeft);
+			this.innerHTML = 'X---' + e.touches[0].clientX + '<br>';
+			this.innerHTML += 'Y---' + e.touches[0].clientY;
+			nowX = e.touches[0].clientX;
+			nowY = e.touches[0].clientY;
+
+			this.style.left = nowX - startX + 'px';
+			this.style.top = nowY - startY + 'px';
+
+			e.preventDefault()
+		}, false)
+	</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>选择器</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box"></div>
+
+	<script type="text/javascript">
+		var box = document.querySelector('div');
+		// 没有长度属性 默认选中第一个
+		console.log(box.length);
+
+		var oBoxs = document.querySelectorAll('div')
+		console.log(oBoxs.length);
+	</script>
+</body>
+</html>
