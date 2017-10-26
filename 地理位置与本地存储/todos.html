@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>待办项列表</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+    <style>
+        * {
+            margin: 0;padding: 0;
+        }
+        a {
+            text-decoration: none;
+        }
+        ul li {
+            list-style: none;
+        }
+
+        /* header start */
+        #header {
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            border-bottom: 1px solid rgb(41, 41, 41);
+            box-shadow: 0 3px 5px gray inset,0 1px 5px gray;
+        }
+        #header .title  {
+            float: left;
+            width: 400px;
+        }
+        /* 注册与登录样式 */
+        #header .login,#header .register {
+            color: red;
+        }
+        /* 登录弹窗 */
+        #loginBox {
+            position: absolute;
+            left: 0;right: 0;top: 0;bottom: 0;
+            margin: auto;
+            width: 400px;
+            height: 300px;
+            border: 1px solid red;
+            background: rgb(233, 221, 189);
+            border-radius: 5px;
+
+            /* display: none; */
+        }
+        #loginBox .title {
+            text-align: center;
+            margin-top: 60px;
+        }
+        #loginBox p {
+            margin: 10px 0;
+        }
+        #loginBox span {
+            display: inline-block;
+            width: 100px;
+            margin-left: 50px;
+            text-align: center;
+        }
+        #loginBox .btn {
+            text-align: center;
+        }
+        #loginBox .btn input {
+            margin: 10px 20px 0;
+            padding: 0 10px
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部信息 -->
+    <header id="header" class="header">
+        <h1 class="title">私人待办项列表</h1>
+        <div class="user">
+            <p>用户信息：<span id="user">未获取到用户信息，请<a class="login" href="javascript:void(0);">登录</a>或者<a class="register" href="javascript:void(0);">注册</a></span></p>
+        </div>
+    </header>
+    <!-- 待办项列表 -->
+    <container id="wrapper">
+        <ul class="list"></ul>
+    </container>
+
+    <!-- 登录弹窗 -->
+    <div id="loginBox">
+        <h2 class="title">用户登录</h2>
+        <p><span>用户名:</span><input type="text" name="username"></p>
+        <p><span>密码:</span><input type="text" name="password"></p>
+        <div class="btn">
+            <input class="login" type="button" value="登录">
+            <input class="register" type="button" value="注册">
+        </div>
+    </div>
+
+
+    <script type='text/javascript'>
+        var LOGIN1 = document.querySelector("#header .login"),
+            REGISTER1 = document.querySelector("#header .register"),
+            LOGINBOX = document.querySelector("#loginBox"),
+            LOGIN2 = document.querySelector("#loginBox .login"),
+            REGISTER2 = document.querySelector("#loginBox .register")
+
+
+    </script>
+</body>
+</html>
