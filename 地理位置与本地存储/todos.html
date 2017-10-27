@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='UTF-8'>
     <title>待办项列表</title>
-    <meta name='keywords' content=''/>
-    <meta name='description' content=''/>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
     <style>
         * {
-            margin: 0;padding: 0;
+            margin: 0;
+            padding: 0;
+            user-select: none;
         }
+
         a {
             text-decoration: none;
         }
+
         ul li {
             list-style: none;
         }
-
         /* header start */
+
         #header {
             height: 80px;
             line-height: 80px;
             text-align: center;
             border-bottom: 1px solid rgb(41, 41, 41);
-            box-shadow: 0 3px 5px gray inset,0 1px 5px gray;
+            box-shadow: 0 3px 5px gray inset, 0 1px 5px gray;
         }
-        #header .title  {
+
+        #header .title {
             float: left;
             width: 400px;
         }
         /* 注册与登录样式 */
-        #header .login,#header .register {
+
+        #header .login,
+        #header .register {
             color: red;
         }
         /* 登录弹窗 */
+
         #loginBox {
             position: absolute;
-            left: 0;right: 0;top: 0;bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
             margin: auto;
             width: 400px;
             height: 300px;
@@ -43,63 +55,298 @@
             background: rgb(233, 221, 189);
             border-radius: 5px;
 
-            /* display: none; */
+            display: none;
         }
+
         #loginBox .title {
             text-align: center;
             margin-top: 60px;
         }
+
         #loginBox p {
             margin: 10px 0;
         }
+
         #loginBox span {
             display: inline-block;
             width: 100px;
             margin-left: 50px;
             text-align: center;
         }
+
         #loginBox .btn {
             text-align: center;
         }
+
         #loginBox .btn input {
             margin: 10px 20px 0;
-            padding: 0 10px
+            padding: 0 10px;
+        }
+
+        #loginBox .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-style: normal;
+            cursor: pointer;
+        }
+        /* 待办项列表 */
+
+        #wrapper {
+            margin: 10px auto 0;
+            width: 500px;
+            height: 400px;
+            background: rgba(128, 51, 51, 0.253);
+            padding: 10px;
+            box-sizing: border-box;
+            display: none;
+        }
+
+        #wrapper .box {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #wrapper .list li {
+            display: flex;
+            line-height: 30px;
+            text-align: center;
+            border-top: 1px solid red;
+        }
+
+        #wrapper .list li:first-child {
+            font-weight: 900;
+        }
+
+        #wrapper .list li:last-child {
+            border-bottom: 1px solid red;
+        }
+
+        #wrapper .list li span {
+            flex: 1;
+        }
+
+        #wrapper .list li span:nth-child(1) {
+            flex-basis: 200px;
+        }
+
+        #wrapper .list li+li span:nth-child(1) {
+            cursor: pointer;
+            color: red;
+        }
+
+        #wrapper .list li span:nth-child(2) {
+            border-right: 1px solid red;
+            border-left: 1px solid red;
+        }
+
+        #wrapper .list li+li span:nth-child(3) {
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <!-- 头部信息 -->
     <header id="header" class="header">
         <h1 class="title">私人待办项列表</h1>
         <div class="user">
-            <p>用户信息：<span id="user">未获取到用户信息，请<a class="login" href="javascript:void(0);">登录</a>或者<a class="register" href="javascript:void(0);">注册</a></span></p>
+            <p>用户信息：
+                <span id="user">未获取到用户信息，请
+                    <a class="login" href="javascript:void(0);">登录</a>
+                </span>
+            </p>
         </div>
     </header>
     <!-- 待办项列表 -->
-    <container id="wrapper">
-        <ul class="list"></ul>
-    </container>
+    <section id="wrapper">
+        <div class="box">
+            事件：
+            <input id="newThing" type="text">
+            <input id="add" type="button" value="添加事件">
+        </div>
+        <ul class="list">
+            <li>
+                <span>事件名</span>
+                <span>是否完成</span>
+                <span>删除事件</span>
+            </li>
+        </ul>
+    </section>
 
     <!-- 登录弹窗 -->
     <div id="loginBox">
         <h2 class="title">用户登录</h2>
-        <p><span>用户名:</span><input type="text" name="username"></p>
-        <p><span>密码:</span><input type="text" name="password"></p>
+        <p>
+            <span>用户名:</span>
+            <input class="username" type="text" name="username">
+        </p>
+        <p>
+            <span>密码:</span>
+            <input class="password" type="text" name="password">
+        </p>
         <div class="btn">
             <input class="login" type="button" value="登录">
             <input class="register" type="button" value="注册">
         </div>
+        <i class="close">✖</i>
     </div>
 
 
     <script type='text/javascript'>
-        var LOGIN1 = document.querySelector("#header .login"),
-            REGISTER1 = document.querySelector("#header .register"),
-            LOGINBOX = document.querySelector("#loginBox"),
-            LOGIN2 = document.querySelector("#loginBox .login"),
-            REGISTER2 = document.querySelector("#loginBox .register")
+        var login1 = document.querySelector("#header .login"),
+            loginbox = document.querySelector("#loginBox"),
+            user = document.querySelector("#user"),
+            username = document.querySelector("#loginBox .username"),
+            password = document.querySelector("#loginBox .password"),
+            login2 = document.querySelector("#loginBox .login"),
+            register = document.querySelector("#loginBox .register"),
+            close = document.querySelector("#loginBox .close"),
+
+            oWrapper = document.querySelector("#wrapper"),
+            oList = document.querySelector("#wrapper .list"),
+            oThingName = document.getElementsByClassName("thingName"),
+            oDel = document.getElementsByClassName("del"),
+            oIsFinish = document.getElementsByClassName("isFinish"),
+            oNewThing = document.querySelector("#newThing"),
+            oAdd = document.querySelector("#add");
+
+        // 定义一个数组存放用户
+        var ARR = [];
+        var LIST = [];
+        var NUM = 0;
+
+        // 点击注册
+        login1.onclick = function () {
+            loginbox.style.display = "block";
+        }
+        // 关闭注册框
+        close.onclick = function () {
+            loginbox.style.display = "none";
+        }
+        // 注册
+        register.onclick = function () {
+            if (username.value && password.value) {
+                localStorage.setItem("username", username.value);
+                localStorage.setItem("password", password.value);
+                loginbox.style.display = "none";
+                checkStorage();
+            }
+        }
+        // 判断是否存在用户
+        function checkStorage() {
+            if (localStorage.getItem("username")) {
+                // console.log(localStorage.getItem("username"));
+                user.innerHTML = "你好，" + localStorage.getItem("username");
+                oWrapper.style.display = "block";
+
+                // console.log(localStorage.length);
+                for (var i = 0; i < localStorage.length; i++) {
+                    if (localStorage.getItem('list' + i)) {
+                        var ele = localStorage.getItem('list' + i);
+                        // console.log(ele);
+                        oList.innerHTML += ele;
+                    }
+                }
+            }
+        }
+        checkStorage();
+
+        // 添加事件
+        oAdd.onclick = function () {
+            var li = document.createElement('li');
+            var thingName = document.createElement("span");
+            var isFinish = document.createElement("span");
+            var del = document.createElement("span");
+            thingName.innerHTML = oNewThing.value;
+            thingName.classList.add("thingName");
+            thingName.style.textDecoration = "none";
+            isFinish.innerHTML = "未完成";
+            isFinish.classList.add('isFinish');
+            del.innerHTML = "删除事件";
+            del.classList.add("del");
+
+            li.appendChild(thingName)
+            li.appendChild(isFinish)
+            li.appendChild(del)
+
+            oList.appendChild(li)
+            console.log(li.outerHTML);
+            localStorage.setItem("list" + (oDel.length - 1), li.outerHTML);
+            console.log(localStorage);
 
 
+            // 点击事件 isFinish
+            for (var i = oThingName.length - 1; i >= 0; i--) {
+                var ele = oThingName[i];
+
+                if ( ele.style.textDecoration == "none" ) {
+                    ele.isFinish = false;
+                } else {
+                    ele.isFinish = true;
+                }
+                ele.i = i;
+                ele.onclick = function () {
+                    this.isFinish = !this.isFinish;
+                    console.log(this.isFinish);
+                    oIsFinish[this.i].innerHTML = this.isFinish ? "已完成" : "未完成";
+                    this.style.textDecoration = this.isFinish ? "line-through" : "none";
+                    this.style.color = this.isFinish ? "gray" : "";
+                    this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
+                    console.log(this.i);
+                    localStorage.setItem("list" + this.i, li.outerHTML)
+                }
+                // console.log(oDel.length);
+            }
+            // 删除事件
+            for (var i = oDel.length - 1; i >= 0; i--) {
+                var ele = oDel[i];
+                ele.i = i;
+                ele.onclick = function () {
+                    oList.removeChild(this.parentNode);
+                    localStorage.removeItem("list" + this.i);
+                    // console.log(localStorage);                
+                }
+                // console.log(oDel.length);
+            }
+        };
+
+        // 获取缓存添加事件
+        // 点击事件
+        for (var i = oThingName.length - 1; i >= 0; i--) {
+            var ele = oThingName[i];
+
+            if ( ele.style.textDecoration == "none" ) {
+                    ele.isFinish = false;
+            } else {
+                ele.isFinish = true;
+            }
+            ele.i = i;
+            ele.onclick = function () {
+                this.isFinish = !this.isFinish;
+                // console.log(this.isFinish);
+                oIsFinish[this.i].innerHTML = this.isFinish ? "已完成" : "未完成";
+                this.style.textDecoration = this.isFinish ? "line-through" : "none";
+                this.style.color = this.isFinish ? "gray" : "";
+                this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
+                console.log('text');
+                localStorage.setItem("list" + this.i, this.parentNode.outerHTML)
+            }
+            // console.log(oDel.length);
+        }
+        // 删除事件
+        for (var i = oDel.length - 1; i >= 0; i--) {
+            var ele = oDel[i];
+            ele.i = i;
+            ele.onclick = function () {
+                oList.removeChild(this.parentNode);
+                localStorage.removeItem("list" + this.i);
+                // console.log(localStorage);                
+            }
+            // console.log(oDel.length);
+        }
+        // localStorage.clear()
     </script>
 </body>
+
 </html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!--声明当前页面的编码集GBK,gb2312(中文编码)，UTF-8(国际编码)-->
+		<meta charset="UTF-8">
+		
+		<!--声明当前页面三要素-->
+		<meta name="Keywords" content="关键字,关键字">
+		<meta name="Description" content="描述">
+		<title>网页标题</title>
+		
+		<!--css样式 层叠样式表 化妆品 衣服-->
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			body{
+				background:url(body.gif);
+				color: #000;
+				font-size: 14px;
+				font-family: 'Microsoft yahei',Verdana, Arial, Helvetica, sans-serif;
+			}
+			#date{
+				width:180px;
+				height:70px;
+				position:absolute;
+				left:50%;
+				margin-left:-90px;
+				top:50%;
+				margin-top:-35px;
+				border:1px dotted rgba(200,200,200,0);
+				border-radius:5px;
+				padding:10px;
+				cursor:move;
+				transition:border .4s;
+				color: #000;
+				font-size: 14px;
+
+			}
+			#date.on{
+				border-color:rgba(200,200,200,1);
+			}
+			#date.down{
+				border-color:rgba(200,200,200,1);
+			}
+			#date.hide{
+				border:1px dotted rgba(200,200,200,0);
+				overflow:hidden;
+				cursor:pointer;
+			}
+			#date .date_main{
+				width:180px;
+			}
+			#date .date_main:after{
+				content:'';
+				display:block;
+				clear:both;
+				zoom:1;
+			}
+			#date .date_left{
+				width:48px;
+				height:68px;
+				border:1px solid #E50020;
+				border-radius:5px;
+				float:left;
+			}
+			#date .date_left .styleCircle{
+				height:14px;
+			}
+			#date .date_left .styleCircle li{
+				width:2px;
+				height:2px;
+				border:1px solid #E50020;
+				border-radius:100%;
+				float:left;
+				margin:5px 4px;
+			}
+			#date .date_left .main{
+				width:40px;
+				height:43px;
+				margin:5px auto 0;
+				background:#E50020;
+				text-align:center;
+			}
+			#date .date_left .main .month{
+				font-size:12px;
+				color:#cccccc;
+				padding-top:5px;a
+				letter-spacing:2px;
+			}
+			#date .date_left .main .date{
+				font-size:16px;
+				font-weight:bold;
+				font-family:'楷体';
+				color:#fff;
+				letter-spacing:2px;
+			}
+			#date .date_right{
+				width:110px;
+				height:70px;
+				float:right;
+			}
+			#date .date_right p{
+				font-size:14px;
+				color:#eee;
+				text-shadow:0 0 2px #fff;
+				line-height:23px;
+			}
+			#date .date_close{
+				width:21px;
+				height:21px;
+				background:url(close2.png);
+				position:absolute;
+				top:-10px;
+				right:-10px;
+				cursor:pointer;
+				opacity:0;
+			}
+		</style>
+		<link rel="stylesheet" href="">
+	</head>
+	<body>
+		<div id="date">
+			<div class="date_main clearfix">
+				<div class="date_left">
+					<ul class="styleCircle">
+						<li></li><li></li><li></li><li></li>
+					</ul>
+					<div class="main">
+						<p class="month" id='month'>1月</p>
+						<p class="date" id='day'>1</p>
+					</div>
+				</div>
+				<div class="date_right">
+					<p class="time" id='time'>00 : 00 : 00</p>
+					<p class="date" id='year'>0000年00月00日</p>
+					<p class="week" id='week'>星期一</p>
+				</div>
+			</div>
+			<div class="date_close" id='date_close' style=""></div>
+		</div>
+
+		<script src='timeMove.js'></script>
+		<script>
+			setInterval(timePlay,1000);
+			timePlay();
+			
+			function timePlay(){
+				var date = new Date;
+				var arr = ['天','一','二','三','四','五','六','七','八','九','十','十一','十二'];
+				time.innerHTML = zero(date.getHours())+' : '+zero(date.getMinutes())+' : '+zero(date.getSeconds());
+				year.innerHTML = date.getFullYear() + '年' + zero((date.getMonth()+1)) + '月' + zero(date.getDate()) + '日';
+				week.innerHTML = '星期' + arr[date.getDay()];				
+				month.innerHTML = arr[(date.getMonth()+1)] + '月';
+				day.innerHTML = date.getDate();
+			};
+			
+			date.onmouseover = function(){
+				this.className = 'on';
+				move( date_close , {opacity:100} );
+			};
+			date.onmouseout = function(){
+				this.className = '';
+				move( date_close , {opacity:0} );
+			};
+			var onOff=true;
+			date_close.onclick = function(){
+				if (onOff)
+				{
+					move( date , {marginLeft:0} , 1000 , 'bounceOut' );
+				}else{
+					move( date , {marginLeft:-90} , 1000 , 'bounceOut' );
+				}
+				onOff = !onOff;
+			};
+
+			function zero( num ){
+				if ( num < 10 ){
+					return '0'+num;
+				}else{
+					return num;
+				}
+			};
+		</script>
+	</body>
+</html>

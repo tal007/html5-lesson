@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>标题</title>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+</head>
+<body>
+    
+    
+    <script type='text/javascript'>
+        // 1、创建一个 Ajax 对象
+        // var xhr = new XMLHTTPRequest();
+        var xhr;
+        if (window.XMLHttpRequest){ 
+        // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码 
+            xhr = new XMLHttpRequest();
+        }else{ 
+        // IE6, IE5 浏览器执行代码 
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // 2、监听事件。状态值发生变化时改变
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert(xhr.responseText)
+            }
+        }
+        // 3、请求方式
+        // 4、发送请求
+    </script>
+</body>
+</html>

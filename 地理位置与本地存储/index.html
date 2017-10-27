@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+	<head>
+		<!--网站编码格式，UTF-8 国际编码，GBK或 gb2312 中文编码-->
+		<meta charset="UTF-8">
+		
+		<title>本地存储</title>
+		
+		<style type="text/css">
+			*{margin:0px; padding:0px;}
+			html,body{ height:100%; }
+			body{
+				/* background:#000 url("image/bg.jpg") center center/100% 100% no-repeat; */
+				background:url(image/body.gif);
+				overflow:hidden;
+				
+			}
+			.Menu{
+				width:200px;
+				background:#fff;
+				position:absolute; 
+				left:500px;
+				top:100px;
+				z-index:33;
+				display:none;
+			}
+			.Menu ul li{
+				list-style-type:none;
+				height:35px;
+				font-size:14px;
+				color:#666; 
+				line-height:35px;
+				text-indent:25px;
+				font-family:"微软雅黑";
+				border-bottom:1px solid #ddd;
+				box-sizing: border-box;
+			}
+			.Menu ul li:last-child{
+				border:none;
+			}
+			.Menu ul li img{
+				margin-right:10px;
+			}
+			.Menu ul li.hover{
+				background:#009999;
+				color:#fff;
+			}
+			#desk_list{
+				width:100%;
+				position:relative;
+				
+			}
+			#desk_list .desk{
+				width:294px; 
+				height:250px;
+				position:absolute;
+				padding-top:60px;
+			}
+			#desk_list .desk .desk_con{
+				width:250px;
+				height:200px; 
+				background:#fff;
+				margin:0px auto; 
+				cursor:move;
+
+				-webkit-user-select:none;
+				-moz-user-select:none;
+				-ms-user-select:none;
+				user-select:none;
+			}
+			#desk_list .desk  p{
+				height:40px;
+				line-height:40px;
+				text-align:center; 
+				font-size:12px;
+			}
+			#desk_list .desk  p span{
+				color:red;
+				padding:0px 5px; 
+				font-size:14px;
+				font-family:"Arial";
+			}
+		</style>
+
+		<!-- 时间 -->
+		<link rel="stylesheet" href="css/date.css">
+	</head>
+	<body>
+
+		<!--菜单开始-->
+		<div class="Menu" id='Menu'>
+			<ul>
+				<li><img src="image/ico1.jpg" align="absmiddle" />添加应用</li>
+				<li class="hover"><img src="image/ico1.jpg" align="absmiddle" />添加便签</li>
+				<li><img src="image/ico2.jpg" align="absmiddle" />清除便签</li>
+				<li><img src="image/ico3.jpg" align="absmiddle" />刷新</li>
+				<li><img src="image/ico4.jpg" align="absmiddle" />上传资料</li>
+				<li><img src="image/ico5.jpg" align="absmiddle" />更换背景</li>
+				<li><img src="image/ico6.jpg" align="absmiddle" />注销</li>
+			</ul>
+		</div>
+		<!--菜单结束-->
+
+		<!--留言本的列表开始-->
+		<div id="desk_list">
+
+			<!--
+			<div class="desk" style="background:url(image/1.png); top:20px; left:50px;"><div class="desk_con" contenteditable='true'></div><p>自动保存</p></div>
+			-->
+			
+
+		</div>
+		<!--留言本的列表结束-->
+
+		
+		<!-- 【日期 start】-->
+		<div id="date">
+			<div class="date_main clearfix">
+				<div class="date_left">
+					<ul class="styleCircle">
+						<li></li><li></li><li></li><li></li>
+					</ul>
+					<div class="main">
+						<p class="month" id='month'>1月</p>
+						<p class="date" id='day'>1</p>
+					</div>
+				</div>
+				<div class="date_right">
+					<p class="time" id='time'>00 : 00 : 00</p>
+					<p class="date" id='year'>0000年00月00日</p>
+					<p class="week" id='week'>星期一</p>
+				</div>
+			</div>
+			<div class="date_close" id='date_close' style=""></div>
+		</div>
+		<!-- 【日期 end】-->
+		<script src='js/timeMove.js'></script>
+		<script src='js/date.js'></script>
+
+		<script type="text/javascript">
+			var aLi = Menu.getElementsByTagName('li');
+            var n;
+			if( window.localStorage.getItem('Note') ){
+                desk_list.innerHTML = window.localStorage.getItem('Note');
+			}
+
+			// 1.	禁止默认右键菜单
+			document.oncontextmenu = function () {return false;};
+
+			// 2.	右键显示菜单
+			document.onmousedown = function (e) {
+				//console.log( e.which );
+				if( e.which === 3 ){
+                    Menu.style.cssText = 'display:block;left:'+e.clientX+'px;top:'+e.clientY+'px';
+				}
+            };
+
+			// 在文档上面点击 把右键菜单隐藏
+			document.addEventListener('click',function (e) {
+                Menu.style.display = 'none';
+            });
+
+
+			window.addEventListener('unload',function () {
+                window.localStorage.setItem('Note', desk_list.innerHTML );
+            });
+
+			for( var i=0;i<aLi.length;i++ ){
+                aLi[i].index = i;
+                // 3.	鼠标滑动到li上面  添加颜色
+                aLi[i].onmouseenter = function () {
+                    for(var i=0;i<aLi.length;i++){
+                        aLi[i].classList.remove('hover');
+					}
+					this.classList.add('hover');
+                };
+                // 4.	点击li 实现对应的功能
+                aLi[i].addEventListener('click',function (e) {
+					//console.log( this.index );
+					switch ( this.index ){
+						case 0:
+                            date.style.display = 'block';
+						    break;
+                        case 1:
+                            //console.log(e.clientX,e.clientY);
+							desk_list.innerHTML += '<div class="desk"' +
+								' style="background:url(image/'+randomNum()+'.png); top:'+e.clientY+'px; left:'+e.clientX+'px;">' +
+								'<div class="desk_con" contenteditable="true"></div>' +
+								'<p>自动保存</p></div>';
+                            M();
+                            break;
+                        case 2:
+                            // 清空便签
+                            desk_list.innerHTML = '';
+                            window.localStorage.clear();
+                            break;
+                        case 3:
+                            // 刷新网页
+                            window.location.reload();
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+					}
+                });
+			}
+
+            M();
+
+            //console.log( window.localStorage.getItem('Note') );
+
+			//console.log( randomNum() );
+			function M() {
+                var aDiv = desk_list.getElementsByClassName('desk_con');
+                if( aDiv.length  ){
+                    window.localStorage.setItem('Note', aDiv[0].parentNode.parentNode.innerHTML );
+                    for (var i=0;i<aDiv.length;i++){
+                        aDiv[i].addEventListener('blur',function () {
+                            window.localStorage.setItem('Note', aDiv[0].parentNode.parentNode.innerHTML );
+                        });
+                        Drag( aDiv[i] );
+					}
+				}
+
+            }
+			function randomNum() {
+				return Math.floor(Math.random()*3+1);
+            }
+			
+            function Drag( obj ) {
+			    n = window.localStorage.getItem('z')? window.localStorage.getItem('z'):0;
+                obj.onmousedown = function (e) {
+                    var This = this;
+					//var n = 0;
+					var l = e.clientX - this.parentNode.offsetLeft;
+					var t = e.clientY - this.parentNode.offsetTop;
+                    this.parentNode.style.zIndex = n;
+                    //console.log(window.localStorage.getItem('z'));
+                    document.onmousemove = function (e) {
+                        var Z = n++;
+                        var x = e.clientX - l;
+                        var y = e.clientY - t;
+						//console.log( n++ );
+                        This.parentNode.style.left = x + 'px';
+                        This.parentNode.style.top = y + 'px';
+                        This.parentNode.style.zIndex = Z;
+                        window.localStorage.setItem('z',Z);
+                    };
+                    document.onmouseup = function () {
+                        console.log( 1 );
+                        window.localStorage.setItem('Note',This.parentNode.parentNode.innerHTML);
+                        document.onmousemove = document.onmouseup = null;
+                    }
+                }
+            }
+		</script>
+		
+
+<!--
+
+	1、禁止浏览器窗口，自带的右键功能
+	2、当按下鼠标右键时，把菜单显示出来
+	3、当鼠标在浏览器窗口任意位置，点击时，菜单要隐藏
+	4、当鼠标滑动到对应的菜单栏上时，要改变对应的背景颜色和字体颜色
+	5、当我点击添加便签时，就可以在页面当，添加一便签
+	6、创建一个随机函，产生 1-3之间的整数，用来更换便签的背景
+	7、利用 html5本数据的存储，来做我们自动保存效果
+	8、如何把存储的数据给读取出来 
+-->
+	
+ </body>
+</html>

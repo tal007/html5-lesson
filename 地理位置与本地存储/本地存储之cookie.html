@@ -1,46 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='UTF-8'>
     <title>本地存储之cookie</title>
-    <meta name='keywords' content=''/>
-    <meta name='description' content=''/>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
 </head>
+
 <body>
     <div class="box"></div>
     <input type="button" value="">
-    
     <script type='text/javascript'>
-        var oBox = document.querySelector(".box");
-        var input = document.querySelector("input");
-        var len = document.cookie.length;
-        // 设置cookie
-        function setCookie(name){
-            var r = Math.floor(Math.random() * 99 + 1);
-            document.cookie = r + "=" + name;
-        }
-        setCookie("木马")
-        console.log(document.cookie);
-        for (var i = 0; i < len; i++) {
-            var ele = document.cookie.split(";")[i];
-            oBox.innerHTML += ele + '</br>';
-        }
-        
-        // 读取cookie
-        function getCookie(name){
-            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-            if (arr=document.cookie.match(reg)) {
-                alert("你好" + arr[2])
-                return unescape(arr[2]);
-            }
-            else {
-                return null;
-            }
-        }
-        input.onclick = function(){
-            getCookie("木马")
-        }
+    var oBox = document.querySelector(".box");
+    var input = document.querySelector("input");
+    var len = document.cookie.length;
+    // 设置cookie
+    function setCookie(name) {
+        var r = Math.floor(Math.random() * 99 + 1);
+        document.cookie = r + "=" + name;
+    }
+    setCookie("木马")
+    console.log(document.cookie);
+    for (var i = 0; i < len; i++) {
+        var ele = document.cookie.split(";")[i];
+        oBox.innerHTML += ele + '</br>';
+    }
 
+    // 读取cookie
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg)) {
+            alert("你好" + arr[2])
+            return unescape(arr[2]);
+        } else {
+            return null;
+        }
+    }
+    //清除cookie    
+    function clearCookie(name) {
+        setCookie(name, "", -1);
+    }
+
+    /*
+        cookie过期时间设置方式：
+        cookie.setMaxAge(0);//不记录cookie
+        cookie.setMaxAge(-1);//会话级cookie，关闭浏览器失效
+        cookie.setMaxAge(60*60);//过期时间为1小时
+     */
+    input.onclick = function() {
+        getCookie("木马")
+    }
+    /*
+        <script>  
+//设置cookie  
+function setCookie(cname, cvalue, exdays) {  
+    var d = new Date();  
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));  
+    var expires = "expires="+d.toUTCString();  
+    document.cookie = cname + "=" + cvalue + "; " + expires;  
+}  
+//获取cookie  
+function getCookie(cname) {  
+    var name = cname + "=";  
+    var ca = document.cookie.split(';');  
+    for(var i=0; i<ca.length; i++) {  
+        var c = ca[i];  
+        while (c.charAt(0)==' ') c = c.substring(1);  
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);  
+    }  
+    return "";  
+}  
+//清除cookie    
+function clearCookie(name) {    
+    setCookie(name, "", -1);    
+}    
+function checkCookie() {  
+    var user = getCookie("username");  
+    if (user != "") {  
+        alert("Welcome again " + user);  
+    } else {  
+        user = prompt("Please enter your name:", "");  
+        if (user != "" && user != null) {  
+            setCookie("username", user, 365);  
+        }  
+    }  
+}  
+checkCookie(); 
+         */
     </script>
 </body>
+
 </html>
