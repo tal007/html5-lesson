@@ -162,7 +162,7 @@
     <section id="wrapper">
         <div class="box">
             事件：
-            <input id="newThing" type="text">
+            <input id="newThing" type="text" autofocus>
             <input id="add" type="button" value="添加事件">
         </div>
         <ul class="list">
@@ -271,44 +271,74 @@
             li.appendChild(del)
 
             oList.appendChild(li)
-            console.log(li.outerHTML);
+            // console.log(li.outerHTML);
+            del.setAttribute("del", oDel.length - 1)
+            thingName.setAttribute("thingName", oDel.length - 1)
             localStorage.setItem("list" + (oDel.length - 1), li.outerHTML);
-            console.log(localStorage);
+            // console.log(localStorage);
 
 
             // 点击事件 isFinish
             for (var i = oThingName.length - 1; i >= 0; i--) {
                 var ele = oThingName[i];
 
-                if ( ele.style.textDecoration == "none" ) {
+                if (ele.style.textDecoration == "none") {
                     ele.isFinish = false;
                 } else {
                     ele.isFinish = true;
                 }
                 ele.i = i;
                 ele.onclick = function () {
+                    console.log(this.i);
+                    console.log(oThingName.length);
                     this.isFinish = !this.isFinish;
-                    console.log(this.isFinish);
                     oIsFinish[this.i].innerHTML = this.isFinish ? "已完成" : "未完成";
                     this.style.textDecoration = this.isFinish ? "line-through" : "none";
                     this.style.color = this.isFinish ? "gray" : "";
-                    this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
-                    console.log(this.i);
-                    localStorage.setItem("list" + this.i, li.outerHTML)
+                    // this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
+                    localStorage.setItem("list" + this.getAttribute("thingName"), this.parentNode.outerHTML)
                 }
                 // console.log(oDel.length);
             }
             // 删除事件
             for (var i = oDel.length - 1; i >= 0; i--) {
                 var ele = oDel[i];
+                // 不要使用 this.i 来进行设置，因为这样删除前面的就会出错
                 ele.i = i;
                 ele.onclick = function () {
                     oList.removeChild(this.parentNode);
-                    localStorage.removeItem("list" + this.i);
-                    // console.log(localStorage);                
+                    // localStorage.removeItem("list" + this.i);
+                    localStorage.removeItem("list" + this.getAttribute("del"));
+                    // console.log(localStorage);
+
+
+                    for (var i = oThingName.length - 1; i >= 0; i--) {
+                        var ele = oThingName[i];
+
+                        if (ele.style.textDecoration == "none") {
+                            ele.isFinish = false;
+                        } else {
+                            ele.isFinish = true;
+                        }
+                        ele.i = i;
+                        ele.onclick = function () {
+                            this.isFinish = !this.isFinish;
+                            // console.log(this.isFinish);
+                            oIsFinish[this.i].innerHTML = this.isFinish ? "已完成" : "未完成";
+                            this.style.textDecoration = this.isFinish ? "line-through" : "none";
+                            this.style.color = this.isFinish ? "gray" : "";
+                            // this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
+                            console.log("list" + this.getAttribute("thingName"));
+                            localStorage.setItem("list" + this.getAttribute("thingName"), this.parentNode.outerHTML)
+                        }
+                        // console.log(oDel.length);
+                    }
                 }
                 // console.log(oDel.length);
             }
+
+
+            oNewThing.value = "";
         };
 
         // 获取缓存添加事件
@@ -316,8 +346,8 @@
         for (var i = oThingName.length - 1; i >= 0; i--) {
             var ele = oThingName[i];
 
-            if ( ele.style.textDecoration == "none" ) {
-                    ele.isFinish = false;
+            if (ele.style.textDecoration == "none") {
+                ele.isFinish = false;
             } else {
                 ele.isFinish = true;
             }
@@ -328,9 +358,9 @@
                 oIsFinish[this.i].innerHTML = this.isFinish ? "已完成" : "未完成";
                 this.style.textDecoration = this.isFinish ? "line-through" : "none";
                 this.style.color = this.isFinish ? "gray" : "";
-                this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
-                console.log('text');
-                localStorage.setItem("list" + this.i, this.parentNode.outerHTML)
+                // this.isFinish ? window.localStorage.setItem('finish',this.isFinish) : window.localStorage.setItem('dFinish',this.isFinish);;
+                console.log(this.i);
+                localStorage.setItem("list" + this.getAttribute("thingName"), this.parentNode.outerHTML)
             }
             // console.log(oDel.length);
         }
@@ -340,11 +370,14 @@
             ele.i = i;
             ele.onclick = function () {
                 oList.removeChild(this.parentNode);
-                localStorage.removeItem("list" + this.i);
-                // console.log(localStorage);                
+                // localStorage.removeItem("list" + this.i);
+                localStorage.removeItem("list" + this.getAttribute("del"));
+                // console.log(localStorage);
             }
             // console.log(oDel.length);
         }
+        // localStorage.removeItem("list2");
+        console.log(localStorage);
         // localStorage.clear()
     </script>
 </body>
