@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>TZ-追梦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            text-align: center;
+        }
+        a{
+            display: inline-block;
+            width: 50%;
+            line-height: 35px;
+            text-decoration: none;
+            border: 1px dashed blue;
+            margin: 20px 0;
+        }
+    </style>
+    <script>
+        document.addEventListener('touchstart',function (e) {
+            e.preventDefault();
+        })
+    </script>
+</head>
+<body>
+    <a href="http://www.baidu.com">百度</a>
+    <a href="http://www.mi.com">小米</a>
+    <a href="http://www.le.com">乐视</a>
+    <a href="http://www.vivo.com">vivo</a>
+    <a href="http://www.taobao.com">淘宝</a>
+    <script>
+        var aA = document.querySelectorAll('a');
+
+        for( var i=0;i<aA.length;i++ ){
+            aA[i].addEventListener('touchmove',function () {
+                this.onOff = true;  // true代表移动了
+            });
+            aA[i].addEventListener('touchend',function () {
+               if( !this.onOff ){  // 代表没有移动
+                    window.location.href = this.href;
+               }
+                this.onOff = false;
+            });
+        }
+    </script>
+</body>
+</html>

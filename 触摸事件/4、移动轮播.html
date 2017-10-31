@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>4、移动轮播</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            /* background: #000; */
+        }
+        /* 文件 */
+
+        .box ul.items {
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: all .1s linear;
+        }
+
+        .box ul.items li {
+            float: left;
+            text-align: center;
+            line-height: 200px;
+            font-size: 30px;
+            transform: translate3d(0,0,0);
+        }
+        /* 小圆点 */
+
+        .box ul.dotteds {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .box ul.dotteds li {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            display: inline-block;
+            transition: all .1s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="items">
+            <li>01</li>
+            <li>02</li>
+            <li>03</li>
+        </ul>
+        <ul class="dotteds">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <script type='text/javascript'>
+        var items = document.querySelector("ul.items"),
+            itemsLi = document.querySelectorAll("ul.items li"),
+            dotteds = document.querySelector("ul.dotteds"),
+            dottedsLi = document.querySelectorAll("ul.dotteds li");
+
+        // 定义常量
+        var itemsLen = itemsLi.length, // li的长度
+            oldX, oldY, // 鼠标按下去的坐标
+            newX, newY; // 鼠标抬起的坐标
+        var X,LEFT;
+
+
+        // 设置轮播图片的宽度，方便动态的添加
+        items.style.width = itemsLen * window.innerWidth + "px";
+        dottedsLi[0].style.backgroundColor = "blue";
+
+        for (var i = 0; i < itemsLen; i++) {
+            var ele = itemsLi[i];
+            ele.i = i;
+            ele.style.width = window.innerWidth + 'px';
+            ele.style.backgroundColor = "hsl(" + i * 50 + ",100%,50%)";
+
+            // 手指触摸
+            ele.addEventListener("touchstart", function (e) {
+                oldX = e.changedTouches[0].clientX;
+                oldY = e.changedTouches[0].clientY;
+                LEFT = parseFloat(getStyle(items,"left"));
+            })
+            ele.addEventListener("touchmove", function (e) {
+                // console.log(e);
+                // console.log(this.i);
+                newX = e.changedTouches[0].clientX;
+                newY = e.changedTouches[0].clientX;
+                
+                X = newX - oldX;
+                // console.log(X);
+                // 图片与小圆点
+                if (X < 0 && this.i + 1 < itemsLen ) {
+                    items.style.left =  LEFT + X + "px";
+                } else if( X > 0 && this.i > 0 ) {
+                    items.style.left =  LEFT + X + "px";
+                    
+                }
+
+            })
+            ele.addEventListener("touchend", function (e) {
+                console.log(LEFT);
+                if ( X < 0 &&  Math.abs(X) > window.innerWidth / 3 && this.i + 1 < itemsLen ) {
+                    items.style.left = -window.innerWidth + LEFT + "px";
+                    // 小圆点
+                    for (var i = 0; i < dottedsLi.length; i++) {
+                        var ele = dottedsLi[i];
+                        ele.style.backgroundColor = "white";
+                    }
+                    dottedsLi[this.i + 1].style.backgroundColor = 'blue';
+                } else if(X > 0 && Math.abs(X) > window.innerWidth / 3 && this.i > 0 ){
+                    items.style.left = window.innerWidth + LEFT + "px";
+                    // 小圆点
+                    for (var i = 0; i < dottedsLi.length; i++) {
+                        var ele = dottedsLi[i];
+                        ele.style.backgroundColor = "white";
+                    }
+                    dottedsLi[this.i - 1].style.backgroundColor = 'blue';
+                }
+                else {
+                    items.style.left = LEFT  + "px";
+                }
+            })
+        }
+
+        // 获取元素的属性值
+        function getStyle(obj,attr){
+            return obj.currentStyle?obj.currentStyle[attr]:window.getComputedStyle(obj)[attr]
+        }
+    </script>
+</body>
+
+</html>

@@ -40,7 +40,10 @@
 		oBoxs[0].addEventListener('touchmove', function(e){
 			console.log(this.offsetTop,this.offsetLeft);
 			this.innerHTML = 'X---' + e.touches[0].clientX + '<br>';
-			this.innerHTML += 'Y---' + e.touches[0].clientY;
+			this.innerHTML += 'Y---' + e.touches[0].clientY + '<br>';
+			this.innerHTML += e.touches.length + '<br>';
+			this.innerHTML += e.targetTouches.length + '<br>';
+			this.innerHTML += e.changedTouches.length + '<br>';
 			nowX = e.touches[0].clientX;
 			nowY = e.touches[0].clientY;
 
