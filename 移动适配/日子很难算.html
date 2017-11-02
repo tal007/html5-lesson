@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0 maximum-scale=1.0, minimum-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>日子很难算</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+</head>
+
+<body>
+
+
+    <script type='text/javascript'>
+        // 这样的话你把时间判断一下。比如是2017-10-03，判断最后的 03 ，然后往前减，到 01 的时候前面的 10 就减一 ，在从
+
+        function date(num) {
+            var day = new Date().getDate();
+            var month = new Date().getMonth() + 1;
+            var year = new Date().getFullYear();
+            var date;
+            // 相差多少天
+            var X = day - num;
+            // 获取某月的天数
+            // var d = new Date(2017,9,0); 
+            // console.log(d.getDate());
+
+            (function changeDay(X){
+                if (X <= 0) {
+                    month = month - 1;
+                    if (month <= 0) {
+                        year = year - 1;
+                        month = 12;
+                    }
+                    day = new Date(year, month, 0).getDate() - Math.abs(X);
+                    changeDay(day)
+                } else {
+                    day = X;
+                    return day;
+                }
+            })(X)
+
+            month = month > 9 ? month : `0` + month;
+            date = year + `-` + month + `-` + day;
+            console.log(date);
+        }
+        date(7); // 7天
+        date(30); // 30天
+        date(40); // 40天
+    </script>
+</body>
+
+</html>

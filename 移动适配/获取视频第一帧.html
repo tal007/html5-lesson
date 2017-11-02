@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>获取视频第一帧</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+</head>
+
+<body>
+    <video id="video" controls="controls" width="300" height="500">
+        <source src="1.mp4" />
+    </video>
+    <button id="capture">Capture</button>
+    <div id="output"></div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type='text/javascript'>
+        (function () {
+            "use strict";
+            var video, $output;
+            var scale = 0.25;
+            var initialize = function () {
+                $output = $("#output");
+                video = $("#video").get(0);
+                console.log(video.width, video.height);
+                $("#capture").click(captureImage);
+            };
+            var captureImage = function () {
+                var canvas = document.createElement("canvas");
+                canvas.width = video.width * scale;
+                canvas.height = video.height * scale;
+                canvas.getContext('2d')
+                    .drawImage(video, 0, 0, canvas.width, canvas.height);
+                var img = document.createElement("img");
+                img.setAttribute('crossOrigin', 'anonymous');
+                img.src = canvas.toDataURL();
+                $output.prepend(img);
+            };
+            $(initialize);
+        }());
+    </script>
+</body>
+
+</html>

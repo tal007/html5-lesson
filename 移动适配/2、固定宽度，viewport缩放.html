@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>2、固定宽度，viewport缩放</title>
+    <meta name='keywords' content='' />
+    <meta name='description' content='' />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        // 整体布局
+        #container {
+            width: 100%;
+            height: 300px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+    </div>
+
+    <script type='text/javascript'>
+        // <meta name='viewport' content='width=device-width, initial-scale=1.0 maximum-scale=1.0, minimum-scale=1.0'>
+        // console.log(window.innerWidth);
+        function setView() {
+            var width = window.screen.width;
+            console.log(width);
+            var scale = width / 640;
+            var meta = document.createElement("meta");
+            meta.setAttribute("name", "viewport");
+            meta.setAttribute("content", "width=640, initial-scale=" + scale + ", maximum-scale=" + scale +
+                ", minimum-scale=" + scale + ",user-scalable = no")
+            document.head.appendChild(meta)
+        }
+        setView()
+    </script>
+</body>
+
+</html>

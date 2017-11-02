@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+	<body>
+		<!-- 文件[最好]下载压缩文件 -->
+		<!-- <a href="dragPhon.rar" download>下载插件</a> -->
+		<!-- <a href="text.txt">下载插件</a> -->
+		<span id='btn'>下载插件</span>
+		<script type="text/javascript">
+			btn.onclick = function(){
+				var oA = document.createElement('a');
+				oA.href = 'http://tanzhouweb.com/AAAjax/test.txt';
+				oA.download = '';
+				oA.style.display = 'none';
+				document.body.appendChild(oA);
+				oA.click();
+			}
+		</script>
+	</body>
+</html>

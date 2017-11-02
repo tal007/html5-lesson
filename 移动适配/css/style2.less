@@ -1,0 +1,117 @@
+@rem: 64rem; // 这里是设计图的宽度除以  10（这个10是自己设置的）  
+@color: #FE5353;
+
+* {
+    margin: 0;padding: 0;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 400;
+}
+
+[dpr-date="1"] * {
+    font-size: .1875rem;
+}
+[dpr-date="2"] * {
+    font-size: .375rem;
+}
+[dpr-date="3"] * {
+    font-size: .375rem;
+}
+
+// 整体布局
+#container {
+    padding: 0 30/@rem;
+
+    .nav {
+        margin: 26/@rem 0 24/@rem;
+        overflow: hidden;
+
+        li {
+            position: relative;
+            float: left;
+            width: 25%;
+            text-align: center;
+            padding-bottom: 25/@rem;
+            font-size: .53125rem;
+
+            &:nth-child(2) {
+                color: @color;;
+
+            }
+
+            .line {
+                position: absolute;
+                left: 50%;
+                margin-top: .328125rem;
+                margin-left: -.3125rem;
+                width: .625rem;
+                height: .0625rem;
+                background: @color;
+            }
+        }
+    }
+
+    .banner {
+        width: 100%;
+        margin-bottom: ;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .hot {
+        h3 {
+            color: @color;
+            vertical-align: middle;
+            margin-top: .359375rem;
+            padding: .234375rem 0;
+
+            .icon {
+                display: inline-block;
+                width: .53125rem;
+                height: .53125rem;
+                background: url("../img/icon.png");
+                background-size: .53125rem .53125rem;
+                vertical-align: middle;
+            }
+
+            span {
+                display: inline-block;
+                margin: .015625rem 0 0 .3125rem;
+                vertical-align: middle;
+            }
+        }
+
+        ul {
+            li {
+                height: 1.96875rem;
+                padding: .359375rem 0;
+                border-bottom: 1px solid #c8c4b4;
+                box-sizing: border-box;
+
+                .tx {
+                    width: 1.25rem;
+                    height: 1.25rem;
+                    float: left;
+
+                    margin-right: .3125rem;
+                }
+                
+                .title {
+                    color: #66625b;
+                    margin-bottom: .28125rem;
+                }
+                p {
+                    color: #c8c4b4;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+	<body>
+		<input type="file" id='input'/>
+		<input type="button" value='获取' id='btn'/>
+		<script type="text/javascript">
+			btn.onclick = function(){
+				//console.log( input.value );
+				//console.log( input.files );
+				//console.log( input.files[0] );
+				var xhr = new XMLHttpRequest();
+				xhr.onload = function(){
+					alert('上传成功');
+				};
+				var oUpload = xhr.upload;
+				//console.log(oUpload);
+				oUpload.onprogress = function(e){
+					console.log('当前进度'+e.loaded+'总进度'+e.total);
+				};
+				xhr.open('post','postFile.php',true);
+				
+				var oFormData = new  FormData();
+				// append()
+				// 给当前FormData对象添加一个键/值对.
+				oFormData.append('file',input.files[0]);
+				xhr.send(oFormData);
+			}
+		</script>
+	</body>
+</html>
